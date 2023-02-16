@@ -7,6 +7,7 @@ import { SendOtpService } from './services/auth/send-otp.service';
 import { ValidateService } from './services/auth/otp-validate.service';
 import { AuthModule } from './components/auth/auth.module';
 import { AppRoutingModule } from './app-routing.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    AuthModule
+    AuthModule,
+    NgbModule
   ],
   providers: [SendOtpService, ValidateService],
   bootstrap: [AppComponent]

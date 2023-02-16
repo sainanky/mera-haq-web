@@ -16,12 +16,17 @@ export class LoginComponent  implements OnInit {
     }
 
     ngOnInit() {
+
       this.sendOtpService.sendOTP().subscribe((response: OTP) => {
           this.otpDetails = response;
       });
       this.validateService.validateOTP().subscribe((response:ValidOTP) => {
         this.validOTP = response;
         console.log(response);
-    });
+      });
+    }
+
+    login(values : any){
+
     }
 }

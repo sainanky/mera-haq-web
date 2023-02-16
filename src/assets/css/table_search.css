@@ -1,0 +1,20 @@
+.table-search input{
+    border-radius: 0;
+    padding: 30px 40px;
+}
+.table-search input:focus{
+    border: 0px solid;
+    box-shadow: none;
+}
+.table-search i.fa{
+    position: absolute;
+    left: 15px;
+    top: 20px;
+    font-size: 20px;
+    color: #999;
+    font-weight: 400;
+}
+.table-search{
+    box-shadow: 0 5px 5px -3px rgb(0 0 0 / 20%), 0 8px 10px 1px rgb(0 0 0 / 14%), 0 3px 14px 2px rgb(0 0 0 / 12%);
+    background: #fff;
+}

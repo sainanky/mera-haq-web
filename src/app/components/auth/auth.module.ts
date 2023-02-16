@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AuthComponent } from './auth.component';
 import { LoginComponent } from './login/login.component';
 import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AuthComponent,
@@ -10,6 +11,8 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
+    FormsModule,                               // <========== Add this line!
+    ReactiveFormsModule,
     RouterModule.forChild([  
       {   
         path: '',   

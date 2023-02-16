@@ -6,9 +6,9 @@ export class SendOtpService {
   configUrl = "https://api.merahaq.techymojo.in/user/send-otp";
   constructor(private http: HttpClient) { }
 
-  sendOTP() {
+  sendOTP(number:string) {
     return this.http.post<any>(this.configUrl,{
-        "mobile":"+919560775627"
+        "mobile":`+91${number}`
     });
   }
 }

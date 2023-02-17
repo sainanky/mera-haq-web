@@ -7,10 +7,11 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
-  NgForm,
   Validators,
 } from "@angular/forms";
 import { Router } from "@angular/router";
+import { CommonService } from '../../../services/common.service';
+
 
 @Component({
   selector: "app-login",
@@ -26,6 +27,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private _router: Router,
+    private _common : CommonService,
     private sendOtpService: SendOtpService,
     private validateService: ValidateService
   ) {}
@@ -44,7 +46,8 @@ export class LoginComponent implements OnInit {
         this.sendOtpService.sendOTP(x).subscribe((response: OTP) => {
           if (response.otp) {
             this.otpDetails = response;
-            console.log(this.otpDetails )
+            this._common.showToastr("success",'OTP generated sucessfully');
+     
             this.showPassword = true;
           }
         });

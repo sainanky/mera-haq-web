@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class CommonService {
 
   constructor(private toastr: ToastrService) { }
@@ -55,13 +53,4 @@ export class CommonService {
       });
     }
   }
-
-
- 
-  getOriginName(){
-    let isFinanvo = true;
-    if(window.location.hostname == "web.compdata.in") isFinanvo = false;
-    return isFinanvo;
-  }
-  
 }

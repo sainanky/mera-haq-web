@@ -4,6 +4,8 @@ import { AuthComponent } from './auth.component';
 import { LoginComponent } from './login/login.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SendOtpService } from 'src/app/services/auth/send-otp.service';
+import { ValidateService } from 'src/app/services/auth/otp-validate.service';
 @NgModule({
   declarations: [
     AuthComponent,
@@ -23,7 +25,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       }  
   ]),
 ],  
-
+providers:[SendOtpService, ValidateService],
 exports : [
   LoginComponent,
   RouterModule

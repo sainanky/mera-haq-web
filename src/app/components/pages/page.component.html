@@ -1,0 +1,15 @@
+<p>page works!</p>
+<div id="app">
+    <div id="sidebar" [ngClass]="{'active' : !isToggleMenu}">
+        <app-leftbar></app-leftbar>
+    </div>
+    <div id="main" [ngClass]="{'active' : isToggleMenu}">
+        <app-header></app-header>
+        <i (click)="toggleMenu()" class="zmdi zmdi-view-headline toggleMenuIcon"></i>
+        <div class="main-content container-fluid">
+            <section class="section">
+                <router-outlet></router-outlet>
+            </section>
+        </div>
+    </div>
+</div>

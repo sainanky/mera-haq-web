@@ -1,0 +1,141 @@
+<div class="sidebar-wrapper active">
+    <div class="sidebar-header text-center">
+        <img src="../../../../assets/images/admin.png" alt="" srcset="">
+    </div>
+    <div class="sidebar-menu">
+        <ul class="menu">
+            <li class='pt-0 sidebar-title text-center'>Admin</li>
+            <!-- <li class="sidebar-item">
+                <a href="javascript:void(0)" routerLink="/app/accounts/list" class='sidebar-link'>
+                    <i data-feather="home" width="20"></i>
+                    <span>Accounts</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="javascript:void(0)" routerLink="/app/files/list" class='sidebar-link'>
+                    <i data-feather="home" width="20"></i>
+                    <span>Files</span>
+                </a>
+            </li> -->
+            <li class="sidebar-item">
+                <a href="javascript:void(0)" routerLink="/app/domain/list" class='sidebar-link'>
+                    <i data-feather="home" width="20"></i>
+                    <span>Add Domain</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="javascript:void(0)" routerLink="/app/querybuilder" class='sidebar-link'>
+                    <i data-feather="home" width="20"></i>
+                    <span>Query Builder</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="javascript:void(0)" routerLink="/app/migration/nametocin/list" class='sidebar-link'>
+                    <i data-feather="home" width="20"></i>
+                    <span>Name To CIN</span>
+                </a>
+            </li>
+            <!-- <li class="sidebar-item">
+                <a href="javascript:void(0)" routerLink="/app/shareholder/list" class='sidebar-link'>
+                    <i data-feather="home" width="20"></i>
+                    <span>Shareholders</span>
+                </a>
+            </li> -->
+            <li class="sidebar-item">
+                <a href="javascript:void(0)" routerLink="/app/migration/updatecin" class='sidebar-link'>
+                    <i data-feather="home" width="20"></i>
+                    <span>Update CIN Status</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="javascript:void(0)" routerLink="/app/orders/list" class='sidebar-link'>
+                    <i data-feather="home" width="20"></i>
+                    <span>Orders</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="javascript:void(0)" routerLink="/app/orders/payments" class='sidebar-link'>
+                    <i data-feather="home" width="20"></i>
+                    <span>Payments</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="javascript:void(0)" routerLink="/app/bank-srn/list" class='sidebar-link'>
+                    <i data-feather="home" width="20"></i>
+                    <span>Bank SRN</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="javascript:void(0)" routerLink="/app/trusted-brand/list" class='sidebar-link'>
+                    <i data-feather="home" width="20"></i>
+                    <span>Trusted Brands</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="javascript:void(0)" routerLink="/app/detailed-report/list" class='sidebar-link'>
+                    <i data-feather="home" width="20"></i>
+                    <span>Detailed Report</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="javascript:void(0)" routerLink="/app/vendors/list" class='sidebar-link'>
+                    <i data-feather="home" width="20"></i>
+                    <span>Vendors</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="javascript:void(0)" class='sidebar-link' (click)="isActive = 'shareholder'">
+                    <span>Shareholders</span>
+                    <i class="zmdi ml-auto" [ngClass]="{'zmdi-chevron-right' : isActive != 'shareholder', 'zmdi-chevron-down' : isActive == 'shareholder'}"></i>
+                </a>
+                <ul class="sub-menu" *ngIf="isActive == 'shareholder'">
+                    <li class="sidebar-item">
+                        <a href="javascript:void(0)" routerLink="/app/shareholder/list" class='sidebar-link'>
+                            <i data-feather="home" width="20"></i>
+                            <span>Shareholders List</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="javascript:void(0)" routerLink="/app/shareholder/list-status" class='sidebar-link'>
+                            <i data-feather="home" width="20"></i>
+                            <span>Check Calculation</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="javascript:void(0)" routerLink="/app/shareholder/list-status/qc-done" class='sidebar-link'>
+                            <i data-feather="home" width="20"></i>
+                            <span>QC DONE</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="sidebar-item d-none">
+                <a href="javascript:void(0)" class='sidebar-link' (click)="isActive = 'services'">
+                    <span>Services</span>
+                    <i class="zmdi ml-auto" [ngClass]="{'zmdi-chevron-right' : isActive != 'services', 'zmdi-chevron-down' : isActive == 'services'}"></i>
+                </a>
+                <ul class="sub-menu" *ngIf="isActive == 'services'">
+                    <li class="sidebar-item">
+                        <a href="javascript:void(0)" routerLink="/app/services/category" class='sidebar-link'>
+                            <i data-feather="home" width="20"></i>
+                            <span>Category</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="javascript:void(0)" routerLink="/app/services/subcategory" class='sidebar-link'>
+                            <i data-feather="home" width="20"></i>
+                            <span>Sub Category</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="javascript:void(0)" routerLink="/app/services/pricing" class='sidebar-link'>
+                            <i data-feather="home" width="20"></i>
+                            <span>Pricing</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+</div>

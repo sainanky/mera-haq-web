@@ -4,6 +4,7 @@ import { HeaderComponent } from './header/header.component';
 import { LeftbarComponent } from './leftbar/leftbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from '@angular/router';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 
 
 
@@ -11,12 +12,13 @@ import { RouterModule } from '@angular/router';
   declarations: [
     HeaderComponent,
     LeftbarComponent,
-    FooterComponent
+    FooterComponent,
+    BreadcrumbComponent
   ],
   imports: [
     CommonModule,
     RouterModule
   ],
-  exports : [ HeaderComponent, LeftbarComponent, FooterComponent ]
+  exports : [ HeaderComponent, LeftbarComponent, FooterComponent, BreadcrumbComponent ]
 })
 export class LayoutModule { }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CommonService } from 'src/app/services/common.service';
 
@@ -9,7 +10,7 @@ import { CommonService } from 'src/app/services/common.service';
 })
 export class AuthComponent {
 
-  constructor(private _auth : AuthService, private _common : CommonService){}
+  constructor(private _auth : AuthService, private _common : CommonService, private _router : Router){}
   mobile : string = '';
   msg_id : string = '';
   otp_msg : string = '';
@@ -38,6 +39,7 @@ export class AuthComponent {
     this._auth.verifyOtp(obj).subscribe(res=>{
       this._common.showToastr("success", "OTP Verified Successfully...");
       localStorage.setItem("token", res['token']);
+      this._router.navigateByUrl('/app/dashboard');
     }, err=>{
       this._common.showToastr("error", err.error.message);
     })

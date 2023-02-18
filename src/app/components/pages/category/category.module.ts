@@ -4,6 +4,10 @@ import { CategoryComponent } from './category.component';
 import { CreateComponent } from './create/create.component';
 import { ListComponent } from './list/list.component';
 import { RouterModule, Routes } from '@angular/router';
+import { LayoutModule } from '../../layout/layout.module';
+import { HttpService } from 'src/app/services/http.service';
+import { CommonService } from 'src/app/services/common.service';
+import { CategoryService } from 'src/app/services/category/category.service';
 
 const routes : Routes = [
   {
@@ -35,7 +39,13 @@ const routes : Routes = [
   ],
   imports: [
     CommonModule,
+    LayoutModule,
     RouterModule.forChild(routes)
+  ],
+  providers : [
+    HttpService,
+    CommonService,
+    CategoryService
   ]
 })
 export class CategoryModule { }

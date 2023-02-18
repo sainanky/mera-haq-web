@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CategoryService } from 'src/app/services/category/category.service';
 
 @Component({
   selector: 'app-list',
@@ -7,4 +8,15 @@ import { Component } from '@angular/core';
 })
 export class ListComponent {
 
+  constructor(private _category : CategoryService){}
+
+  ngOnInit(){
+    this.getList();
+  }
+
+  getList(){
+    this._category.get().subscribe(res=>{
+      console.log(res)
+    })
+  }
 }

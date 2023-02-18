@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url : 'https://api.merahaq.techymojo.in'
+  url : 'http://localhost:8080'
 };
 
 /*

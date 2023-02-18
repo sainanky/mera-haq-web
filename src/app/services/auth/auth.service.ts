@@ -15,4 +15,8 @@ export class AuthService {
   verifyOtp(obj){
     return this._http.post(`/user/check-admin-otp`, obj);
   }
+
+  verifyToken(){
+    return this._http.post('/user/token/verify', {});
+  }
 }

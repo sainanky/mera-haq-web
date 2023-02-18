@@ -1,0 +1,12 @@
+footer{
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    display: flex;
+    width: 100%;
+    column-gap: 40px;
+    background-color: #fff;
+    .copyright{
+        padding-left: 10px;
+    }
+}

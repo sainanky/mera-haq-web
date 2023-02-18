@@ -10,13 +10,6 @@
           <div class="row justify-content-center">
             <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
-              <!-- <div class="d-flex justify-content-center py-4">
-                <a href="javascript:void()" class="logo d-flex align-items-center w-auto">
-                  <img src="../../../assets/logo/logo.jpg" alt="">
-                  <span class="d-none d-lg-block">NiceAdmin</span>
-                </a>
-              </div> -->
-
               <div class="card mb-3 py-4">
 
                 <div class="card-body">
@@ -35,19 +28,20 @@
                       <label for="mobile" class="form-label">Mobile</label>
                       <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend">+91</span>
-                        <input type="text" name="mobile" class="form-control" id="mobile" required>
+                        <input type="text" name="mobile" [(ngModel)]="mobile" class="form-control" id="mobile" required>
                         <div class="invalid-feedback">Please enter your mobile.</div>
                       </div>
                     </div>
 
-                    <div class="col-12">
-                      <label for="yourPassword" class="form-label">Password</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
-                      <div class="invalid-feedback">Please enter your password!</div>
+                    <div *ngIf="msg_id" class="col-12">
+                      <label for="yourPassword" class="form-label">OTP</label>
+                      <input type="password" name="password" [(ngModel)]="otp_msg" class="form-control" id="yourPassword" required>
+                      <div class="invalid-feedback">Please enter your otp!</div>
                     </div>
 
                     <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit">Login</button>
+                      <button *ngIf="!msg_id" class="btn btn-primary w-100" type="button" (click)="sendOtp()">Send OTP</button>
+                      <button *ngIf="msg_id" class="btn btn-primary w-100" type="button" (click)="verifyOtp()">Verify OTP</button>
                     </div>
                   </form>
 

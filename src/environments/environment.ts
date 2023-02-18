@@ -4,11 +4,7 @@
 
 export const environment = {
   production: false,
-  url : 'https://api.merahaq.techymojo.in',
-  apiKey : '8i1gNe4cIU',
-  apiSecretKey : 'ponaryoVPXAwZQkaLZTF4scER57BbJAkftyQCpM3',
-  defaultImage : 'https://via.placeholder.com/100x100.png',
-  payment_api_url : 'http://localhost:1000'
+  url : 'https://api.merahaq.techymojo.in'
 };
 
 /*

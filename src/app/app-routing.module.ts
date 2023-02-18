@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AuthModule } from './components/auth/auth.module';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { PagesModule } from './components/pages/pages.module';
 
 const routes: Routes = [
   {
@@ -14,6 +16,14 @@ const routes: Routes = [
       {
         path : "auth",
         loadChildren : () => AuthModule
+      },
+      {
+        path : "app",
+        loadChildren : () => PagesModule
+      },
+      {
+        path : "**",
+        component : PageNotFoundComponent
       }
     ]
   }

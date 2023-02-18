@@ -3,12 +3,14 @@
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
-      <li class="nav-item">
-        <a class="nav-link " href="index.html">
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
-        </a>
-      </li><!-- End Dashboard Nav -->
+        <ng-container *ngFor="let item of menuArr">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="{{item.url}}" [routerLinkActive]="['active']">
+                <i class="{{item?.icon}}"></i>
+                <span>{{item?.name}}</span>
+              </a>
+            </li>
+        </ng-container>
     </ul>
 
 </aside><!-- End Sidebar-->

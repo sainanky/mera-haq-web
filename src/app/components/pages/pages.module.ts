@@ -4,6 +4,7 @@ import { PagesComponent } from './pages.component';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { LayoutModule } from '../layout/layout.module';
+import { CategoryModule } from './category/category.module';
 
 const routes : Routes = [
   {
@@ -15,9 +16,8 @@ const routes : Routes = [
     path : "",
     component : PagesComponent,
     children : [
-      {
-        path : "dashboard", loadChildren : () => DashboardModule
-      }
+      { path : "dashboard", loadChildren : () => DashboardModule },
+      { path : "category", loadChildren : () => CategoryModule },
     ]
   }
 ];

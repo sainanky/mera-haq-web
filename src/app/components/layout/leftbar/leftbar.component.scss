@@ -1,0 +1,10 @@
+.sidebar-nav {
+    .nav-link{
+        &.active{
+            color: #4154f1;
+            i{
+                color: #4154f1;
+            }
+        }
+    }
+}

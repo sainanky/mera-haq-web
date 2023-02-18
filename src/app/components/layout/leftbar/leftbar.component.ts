@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./leftbar.component.scss']
 })
 export class LeftbarComponent {
-
+  
+  menuArr : any = [
+    { name : "Dashboard", url : "/app/dashboard", icon : "bi bi-grid" },
+    { name : "Category", url : "/app/category", icon : "bi bi-journal-text" },
+  ];
 }

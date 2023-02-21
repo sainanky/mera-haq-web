@@ -17,7 +17,7 @@
                   <div class="pt-4 pb-2">
                     <div class="text-center">
                         <img src="../../../assets/logo/logo.jpg" height="60" alt="">
-                        <h4 class="card-title d-none d-lg-block pt-2 mb-0">NiceAdmin</h4>
+                        <h4 class="card-title d-none d-lg-block pt-2 mb-0">Mera Haq</h4>
                     </div>
                     <h5 class="text-center pb-0 fs-4 mb-0">Login to Your Account</h5>
                   </div>
@@ -34,14 +34,20 @@
                     </div>
 
                     <div *ngIf="msg_id" class="col-12">
-                      <label for="yourPassword" class="form-label">OTP</label>
+                      <label for="yourPassword" class="form-label otp-label">
+                        <span>OTP</span>
+                        <span class="otp-resend" [ngClass]="{'opacity-50' : counter > 0}">Resend OTP <span *ngIf="counter > 0">in {{counter}} Sec</span></span>
+                      </label>
                       <input type="password" name="password" [(ngModel)]="otp_msg" class="form-control" id="yourPassword" required>
                       <div class="invalid-feedback">Please enter your otp!</div>
                     </div>
 
                     <div class="col-12">
-                      <button *ngIf="!msg_id" class="btn btn-primary w-100" type="button" (click)="sendOtp()">Send OTP</button>
-                      <button *ngIf="msg_id" class="btn btn-primary w-100" type="button" (click)="verifyOtp()">Verify OTP</button>
+                      <button *ngIf="!msg_id && !isApiLoading" class="btn btn-primary w-100" type="button" (click)="sendOtp()">Send OTP</button>
+                      <button *ngIf="msg_id && !isApiLoading" class="btn btn-primary w-100" type="button" (click)="verifyOtp()">Verify OTP</button>
+                      <button *ngIf="isApiLoading" class="btn btn-primary w-100" type="button">
+                        <i class="zmdi zmdi-spinner fa-spin"></i>
+                      </button>
                     </div>
                   </form>
 

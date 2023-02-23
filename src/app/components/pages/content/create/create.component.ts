@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-create',
@@ -45,8 +46,10 @@ export class CreateComponent {
         tag: 'h1',
       },
     ],
-    uploadUrl: 'v1/image',
-    // upload: (file: File) => {  }
+    uploadUrl: environment.url+'/upload/image',
+    // upload: (file: File) => { 
+
+    // },
     uploadWithCredentials: false,
     sanitize: true,
     toolbarPosition: 'top',

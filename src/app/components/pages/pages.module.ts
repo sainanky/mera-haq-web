@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { LayoutModule } from '../layout/layout.module';
 import { CategoryModule } from './category/category.module';
+import { ContentModule } from './content/content.module';
 
 const routes : Routes = [
   {
@@ -18,6 +19,7 @@ const routes : Routes = [
     children : [
       { path : "dashboard", loadChildren : () => DashboardModule },
       { path : "category", loadChildren : () => CategoryModule },
+      { path : "content", loadChildren : () => ContentModule },
     ]
   }
 ];

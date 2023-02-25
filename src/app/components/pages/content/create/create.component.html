@@ -62,34 +62,6 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <!-- <div class="row mb-3">
-                          <div class="col-lg-3 col-6">
-                            <label for="inputNumber" class="col-form-label">Name</label>
-                            <div class="">
-                                <input type="text" class="form-control">
-                            </div>
-                          </div>
-                          <div class="col-lg-3 col-6">
-                            <label for="inputNumber" class="col-form-label">Type</label>
-                            <div class="">
-                              <select class="form-control">
-                                <option value="">Select Type</option>
-                                <option value="pdf">PDF</option>
-                                <option value="image">Image</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div class="col-lg-4 col-6">
-                            <label for="inputNumber" class="col-form-label">Upload</label>
-                            <div class="">
-                                <input class="form-control" (change)="onFilePicked($event)" type="file" id="formFile">
-                            </div>
-                          </div>
-                          <div class="col-lg-2 col-12 btn-upload-container">
-                            <button class="btn btn-dark btn-upload" type="button" (click)="addAttachment()">+ Add</button>
-                          </div>
-                        </div> -->
-
                         <div class="row mt-3">
                           <table class="table">
                             <thead>
@@ -126,7 +98,7 @@
                                     <input *ngIf="!item?.value.IS_SUBMIT && item?.value.TYPE == 'pdf'" class="form-control" (change)="onFilePicked($event, i)" type="file" id="formFile" accept="application/pdf">
                                   </td>
                                   <td>
-                                    <i *ngIf="i > 0" class="zmdi zmdi-delete"></i>
+                                    <i *ngIf="item?.value.IS_SUBMIT" (click)="removeAttachment(i)" class="zmdi zmdi-delete"></i>
                                   </td>
                                 </tr>
                               </ng-container>
@@ -141,7 +113,42 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="bordered-contact" role="tabpanel" aria-labelledby="contact-tab">
-                      Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
+                      <div class="row mt-3">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th>#</th>
+                              <th>Name</th>
+                              <th>Youtube Link</th>
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <ng-container formArrayName="YOUTUBE_LINKS" *ngFor="let item of YOUTUBE_LINKS.controls; let i=index">
+                              <tr [formGroupName]="i">
+                                <td>{{i + 1}}.</td>
+                                <td>
+                                  <ng-container *ngIf="item?.value.IS_SUBMIT">{{item?.value.NAME}}</ng-container>
+                                  <input *ngIf="!item?.value.IS_SUBMIT" type="text" class="form-control" placeholder="Enter name" formControlName="NAME">
+                                </td>
+                                <td>
+                                  <iframe *ngIf="item?.value.IS_SUBMIT" width="90" height="60" [src]="('https://www.youtube.com/embed/' + item.value.URL) | safe : 'resourceUrl'"></iframe>
+                                  <input *ngIf="!item?.value.IS_SUBMIT" type="text" class="form-control" formControlName="URL" placeholder="Enter youtube video ID (3kySIdRBdEM)">
+                                </td>
+                                <td>
+                                  <i *ngIf="item?.value.IS_SUBMIT" (click)="removeYoutube(i)" class="zmdi zmdi-delete"></i>
+                                </td>
+                              </tr>
+                            </ng-container>
+                          </tbody>
+                        </table>
+                      </div>
+
+                      <div class="row mt-3">
+                        <div class="col-lg-12 text-left">
+                          <button class="btn btn-dark btn-upload" [disabled]="!YOUTUBE_LINKS.valid" type="button" (click)="submitYoutubeLinks()">+ Add</button>
+                        </div>
+                      </div>
                     </div>
                 </div>
               </div>

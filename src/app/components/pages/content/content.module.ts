@@ -12,6 +12,7 @@ import { ContentService } from 'src/app/services/content/content.service';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { CategoryService } from 'src/app/services/category/category.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SafePipe } from 'src/app/pipes/safe/safe.pipe';
 
 const routes : Routes = [
   { path : "", redirectTo : "list", pathMatch : "full" },
@@ -29,7 +30,8 @@ const routes : Routes = [
   declarations: [
     ContentComponent,
     CreateComponent,
-    ListComponent
+    ListComponent,
+    SafePipe
   ],
   imports: [
     CommonModule,

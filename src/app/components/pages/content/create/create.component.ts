@@ -1,6 +1,7 @@
 import { HttpEvent } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { Observable } from 'rxjs/internal/Observable';
 import { CategoryService } from 'src/app/services/category/category.service';
@@ -65,7 +66,7 @@ export class CreateComponent {
   };
 
   constructor(private _content : ContentService, private _category : CategoryService,
-    private fb : FormBuilder){}
+    private fb : FormBuilder, private sanitizer : DomSanitizer){}
 
   errorMsg : boolean = false;
   fileObj: File;
@@ -73,6 +74,7 @@ export class CreateComponent {
   categoryArr : any = [];
   createForm : FormGroup;
   currAttcIndex : number = 0;
+  currYoutubeIndex : number = 0;
 
   ngOnInit(){
     this.getCategory();
@@ -81,9 +83,11 @@ export class CreateComponent {
       NAME : new FormControl('', Validators.required),
       DESCRIPTION : new FormControl('', Validators.required),
       ATTACHMENTS : this.fb.array([]),
+      YOUTUBE_LINKS : this.fb.array([]),
     });
     setTimeout(() => {
       this.addAttachment();
+      this.addYoutube();
     }, 1000);
   }
 
@@ -98,6 +102,9 @@ export class CreateComponent {
   }
   get ATTACHMENTS() : FormArray {
     return this.createForm.get("ATTACHMENTS") as FormArray
+  }
+  get YOUTUBE_LINKS() : FormArray {
+    return this.createForm.get("YOUTUBE_LINKS") as FormArray
   }
 
   getCategory(){
@@ -125,12 +132,15 @@ export class CreateComponent {
     fileForm.append('file', this.fileObj);
     this._content.fileUpload(fileForm).subscribe(res => {
       this.ATTACHMENTS.controls[idx]['controls']['URL'].setValue(res['imageUrl']);
-      console.log("this.ATTACHMENTS =", this.ATTACHMENTS)
     });
   }
 
   addAttachment() {
     this.ATTACHMENTS.push(this.newAttachment({ NAME : '', URL : '', TYPE : ''}));
+  }
+
+  addYoutube() {
+    this.YOUTUBE_LINKS.push(this.newYoutubeLinks({ NAME : '', URL : '' }));
   }
 
   newAttachment(value): FormGroup {
@@ -142,17 +152,40 @@ export class CreateComponent {
     });
   }
 
+  newYoutubeLinks(value): FormGroup {
+    return this.fb.group({
+      NAME: new FormControl(value.NAME, Validators.required),
+      URL: new FormControl(value.URL),
+      IS_SUBMIT : false
+    });
+  }
+
+  removeAttachment(i:number) {
+    this.ATTACHMENTS.removeAt(i);
+    this.currAttcIndex--;
+  }
+
+  removeYoutube(i:number) {
+    this.YOUTUBE_LINKS.removeAt(i);
+    this.currYoutubeIndex--;
+  }
+
   submitAttachment(){
     this.ATTACHMENTS.controls[this.currAttcIndex]['controls']['IS_SUBMIT'].setValue(true);
     this.addAttachment();
     this.currAttcIndex++;
   }
 
-  addAttachments(){
-    console.log()
+  submitYoutubeLinks(){
+    this.YOUTUBE_LINKS.controls[this.currYoutubeIndex]['controls']['IS_SUBMIT'].setValue(true);
+    this.addYoutube();
+    this.currYoutubeIndex++;
   }
 
   submit(){
     console.log(this.createForm.value)
+    let attachmentArr = this.ATTACHMENTS.value;
+    attachmentArr = attachmentArr.filter(v => v.IS_SUBMIT && v.URL);
+    
   }
 }

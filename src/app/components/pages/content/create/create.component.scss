@@ -1,0 +1,21 @@
+.btn-upload-container{
+    display: flex;
+    align-items: end;
+    .btn-upload{
+        height: fit-content;
+    }
+}
+
+.nav{
+    .tabs-disabled{
+        pointer-events: none;
+        opacity: 0.3;
+    }
+}
+
+.help-info{
+    .error{
+        color: #e53939;
+        font-size: 14px;
+    }
+}

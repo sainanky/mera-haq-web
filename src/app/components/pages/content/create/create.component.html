@@ -14,20 +14,27 @@
             </div>
 
             <!-- General Form Elements -->
-            <form>
+            <form [formGroup]="createForm">
               <div class="row mb-3">
                 <div class="col-lg-6 col-12">
-                    <label for="inputNumber" class="col-form-label">Category</label>
-                    <div class="">
-                        <select class="form-control">
-                            <option value="">Select Category</option>
-                        </select>
-                    </div>
+                  <label for="inputNumber" class="col-form-label">Category</label>
+                  <div class="">
+                      <select class="form-control" formControlName="CATEGORY">
+                          <option value="">Select Category *</option>
+                          <option *ngFor="let item of categoryArr" [value]="item?.C_ID">{{item?.NAME}}</option>
+                      </select>
+                      <div class="help-info" *ngIf= "CATEGORY.touched && CATEGORY.invalid">
+                        <span class="error" *ngIf="CATEGORY.errors.required">please select category</span>
+                      </div>
+                  </div>
                 </div>
                 <div class="col-lg-6 col-12">
-                    <label for="inputText" class="col-form-label">Name</label>
+                    <label for="inputText" class="col-form-label">Name *</label>
                     <div class="">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" formControlName="NAME">
+                        <div class="help-info" *ngIf= "NAME.touched && NAME.invalid">
+                          <span class="error" *ngIf="NAME.errors.required">please enter name</span>
+                       </div>
                     </div>
                 </div>
               </div>
@@ -49,30 +56,99 @@
                         <div class="row">
                             <div class="col-lg-12 col-12">
                                 <div class="">
-                                    <angular-editor id="editor2" [config]="editorConfig"></angular-editor>
+                                    <angular-editor id="editor2" [config]="editorConfig" formControlName="DESCRIPTION"></angular-editor>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="row">
-                            <div class="col-lg-6 col-12">
-                                <label for="inputNumber" class="col-form-label">Upload</label>
-                                <div class="">
-                                    <input class="form-control" type="file" id="formFile">
-                                </div>
+                        <!-- <div class="row mb-3">
+                          <div class="col-lg-3 col-6">
+                            <label for="inputNumber" class="col-form-label">Name</label>
+                            <div class="">
+                                <input type="text" class="form-control">
                             </div>
+                          </div>
+                          <div class="col-lg-3 col-6">
+                            <label for="inputNumber" class="col-form-label">Type</label>
+                            <div class="">
+                              <select class="form-control">
+                                <option value="">Select Type</option>
+                                <option value="pdf">PDF</option>
+                                <option value="image">Image</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-lg-4 col-6">
+                            <label for="inputNumber" class="col-form-label">Upload</label>
+                            <div class="">
+                                <input class="form-control" (change)="onFilePicked($event)" type="file" id="formFile">
+                            </div>
+                          </div>
+                          <div class="col-lg-2 col-12 btn-upload-container">
+                            <button class="btn btn-dark btn-upload" type="button" (click)="addAttachment()">+ Add</button>
+                          </div>
+                        </div> -->
+
+                        <div class="row mt-3">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Image</th>
+                                <th>Action</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <ng-container formArrayName="ATTACHMENTS" *ngFor="let item of ATTACHMENTS.controls; let i=index">
+                                <tr [formGroupName]="i">
+                                  <td>{{i + 1}}.</td>
+                                  <td>
+                                    <ng-container *ngIf="item?.value.IS_SUBMIT">{{item?.value.NAME}}</ng-container>
+                                    <input *ngIf="!item?.value.IS_SUBMIT" type="text" class="form-control" placeholder="Enter name" formControlName="NAME">
+                                  </td>
+                                  <td>
+                                    <ng-container *ngIf="item?.value.IS_SUBMIT">{{item?.value.TYPE}}</ng-container>
+                                    <select *ngIf="!item?.value.IS_SUBMIT" class="form-control" formControlName="TYPE">
+                                      <option value="">Select Type</option>
+                                      <option value="pdf">PDF</option>
+                                      <option value="image">Image</option>
+                                    </select>
+                                  </td>
+                                  <td>
+                                    <img *ngIf="item?.value.IS_SUBMIT && item?.value.TYPE == 'image'" [src]="item?.value.URL" height="60">
+                                    <a *ngIf="item?.value.IS_SUBMIT && item?.value.TYPE == 'pdf'" [href]="item?.value.URL" target="_blank">
+                                      <i class="bi bi-file-earmark-arrow-down"></i>
+                                    </a>
+                                    <input *ngIf="!item?.value.IS_SUBMIT && (item?.value.TYPE == 'image' || !item?.value.TYPE)" class="form-control" (change)="onFilePicked($event, i)" type="file" id="formFile" accept="image/png, image/gif, image/jpeg">
+                                    <input *ngIf="!item?.value.IS_SUBMIT && item?.value.TYPE == 'pdf'" class="form-control" (change)="onFilePicked($event, i)" type="file" id="formFile" accept="application/pdf">
+                                  </td>
+                                  <td>
+                                    <i *ngIf="i > 0" class="zmdi zmdi-delete"></i>
+                                  </td>
+                                </tr>
+                              </ng-container>
+                            </tbody>
+                          </table>
+                        </div>
+
+                        <div class="row mt-3">
+                          <div class="col-lg-12 text-left">
+                            <button class="btn btn-dark btn-upload" [disabled]="!ATTACHMENTS.valid" type="button" (click)="submitAttachment()">+ Add</button>
+                          </div>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="bordered-contact" role="tabpanel" aria-labelledby="contact-tab">
-                    Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
+                      Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
                     </div>
                 </div>
               </div>
               <div class="row mb-3">
                 <div class="col-sm-12 text-center">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                  <button type="submit" class="btn btn-outline-primary ms-2">Reset</button>
+                  <button type="button" class="btn btn-primary" (click)="submit()">Submit</button>
+                  <button type="button" class="btn btn-outline-primary ms-2">Reset</button>
                 </div>
               </div>
 

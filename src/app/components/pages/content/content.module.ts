@@ -10,6 +10,8 @@ import { HttpService } from 'src/app/services/http.service';
 import { CommonService } from 'src/app/services/common.service';
 import { ContentService } from 'src/app/services/content/content.service';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { CategoryService } from 'src/app/services/category/category.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes : Routes = [
   { path : "", redirectTo : "list", pathMatch : "full" },
@@ -34,8 +36,10 @@ const routes : Routes = [
     RouterModule.forChild(routes),
     LayoutModule,
     NgxDatatableModule,
-    AngularEditorModule
+    AngularEditorModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers : [ HttpService, CommonService, ContentService ]
+  providers : [ HttpService, CommonService, ContentService, CategoryService ]
 })
 export class ContentModule { }

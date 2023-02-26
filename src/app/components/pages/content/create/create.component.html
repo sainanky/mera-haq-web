@@ -40,6 +40,21 @@
               </div>
 
               <div class="row mb-3">
+                <div class="col-lg-6 col-12 featured-div">
+                  <label for="inputNumber" class="col-form-label" form="flexSwitchCheckDefault">Featured</label>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" name="IS_FEATURED" formControlName="IS_FEATURED" type="checkbox" id="flexSwitchCheckDefault">
+                  </div>
+                </div>
+                <div class="col-lg-6 col-12">
+                    <label for="inputText" class="col-form-label">Banner Image</label>
+                    <div class="">
+                      <input class="form-control" (change)="onFilePicked($event, 'banner')" type="file" id="formFileBanner" accept="image/png, image/gif, image/jpeg">
+                    </div>
+                </div>
+              </div>
+
+              <div class="row mb-3">
                 <ul class="nav nav-tabs nav-tabs-bordered" id="borderedTab" role="tablist">
                     <li class="nav-item" role="presentation">
                       <button class="nav-link active" id="desc-tab" data-bs-toggle="tab" data-bs-target="#bordered-desc" type="button" role="tab" aria-controls="home" aria-selected="true">Description</button>

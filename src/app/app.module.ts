@@ -13,8 +13,7 @@ import { SafePipe } from './pipes/safe/safe.pipe';
 @NgModule({
   declarations: [
     AppComponent,
-    PageNotFoundComponent,
-    SafePipe
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

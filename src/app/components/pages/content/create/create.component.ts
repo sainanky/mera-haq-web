@@ -1,10 +1,9 @@
-import { HttpEvent } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
-import { Observable } from 'rxjs/internal/Observable';
 import { CategoryService } from 'src/app/services/category/category.service';
+import { CommonService } from 'src/app/services/common.service';
 import { ContentService } from 'src/app/services/content/content.service';
 import { environment } from 'src/environments/environment';
 
@@ -66,7 +65,7 @@ export class CreateComponent {
   };
 
   constructor(private _content : ContentService, private _category : CategoryService,
-    private fb : FormBuilder, private sanitizer : DomSanitizer){}
+    private fb : FormBuilder, private _common : CommonService, private _router : Router){}
 
   errorMsg : boolean = false;
   fileObj: File;
@@ -82,6 +81,8 @@ export class CreateComponent {
       CATEGORY : new FormControl('', Validators.required),
       NAME : new FormControl('', Validators.required),
       DESCRIPTION : new FormControl('', Validators.required),
+      IS_FEATURED : false,
+      BANNER_IMG : '',
       ATTACHMENTS : this.fb.array([]),
       YOUTUBE_LINKS : this.fb.array([]),
     });
@@ -116,7 +117,7 @@ export class CreateComponent {
     })
   }
 
-  onFilePicked(event: Event, idx : Number): void {
+  onFilePicked(event: Event, idx : any): void {
     this.errorMsg = false
     const FILE = (event.target as HTMLInputElement).files[0];
     this.fileObj = FILE;
@@ -131,7 +132,8 @@ export class CreateComponent {
     const fileForm = new FormData();
     fileForm.append('file', this.fileObj);
     this._content.fileUpload(fileForm).subscribe(res => {
-      this.ATTACHMENTS.controls[idx]['controls']['URL'].setValue(res['imageUrl']);
+      if(idx == 'banner') this.createForm.controls.BANNER_IMG.setValue(res['imageUrl']);
+      else this.ATTACHMENTS.controls[idx]['controls']['URL'].setValue(res['imageUrl']);
     });
   }
 
@@ -184,8 +186,40 @@ export class CreateComponent {
 
   submit(){
     console.log(this.createForm.value)
-    let attachmentArr = this.ATTACHMENTS.value;
-    attachmentArr = attachmentArr.filter(v => v.IS_SUBMIT && v.URL);
-    
+    let { CATEGORY, NAME, DESCRIPTION, IS_FEATURED, BANNER_IMG, ATTACHMENTS, YOUTUBE_LINKS } = this.createForm.value;
+    let attachmentArr = [], youtubeLinksArr = [];
+    if(ATTACHMENTS.length > 0){
+      for(let i = 0; i < ATTACHMENTS.length; i++){
+        let v = ATTACHMENTS[i];
+        if(v.URL) attachmentArr.push({NAME : v.NAME, TYPE : v.TYPE ? v.TYPE : 'image', URL : v.URL});
+      }
+    }
+    if(YOUTUBE_LINKS.length > 0){
+      for(let i = 0; i < YOUTUBE_LINKS.length; i++){
+        let v = YOUTUBE_LINKS[i];
+        if(v.URL) youtubeLinksArr.push({NAME : v.NAME, URL : v.URL});
+      }
+    }
+    let obj = { 
+      CATEGORY, 
+      NAME, 
+      DESCRIPTION, 
+      IS_FEATURED : IS_FEATURED ? 1 : 0,
+      BANNER_IMG : BANNER_IMG,
+      ATTACHMENTS : attachmentArr, 
+      YOUTUBE_LINKS : youtubeLinksArr 
+    };
+    console.log("obj =", obj)
+    this._content.save(obj).subscribe(res=>{
+      console.log(res);
+      this._common.showToastr("success", "Saved Successfully...");
+      this.createForm.reset();
+      setTimeout(() => {
+        this._router.navigateByUrl('/app/content/list');
+      }, 1500);
+    },err=>{
+      console.log(err);
+      this._common.showToastr("error", err.error.message);
+    })
   }
 }

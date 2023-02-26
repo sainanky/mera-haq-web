@@ -11,4 +11,12 @@ export class ContentService {
   fileUpload(file: FormData) {
     return this._http.uploadFile('/upload/file', file);
   }
+
+  save(body){
+    return this._http.post(`/content`, body);
+  }
+
+  get(){
+    return this._http.get(`/content`);
+  }
 }

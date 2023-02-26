@@ -16,12 +16,19 @@
             [limit]="10"
             [scrollbarH]="true">
 
-            <ngx-datatable-column prop="ICON_URL" [sortable]="false" [width]="30">
-              <ng-template ngx-datatable-header-template>ICON</ng-template>
-              <ng-template class="d-flext" let-row="row" ngx-datatable-cell-template>
-                  <img [src]="row?.ICON_URL" height="40">
+            <ngx-datatable-column prop="NAME" [sortable]="true" [width]="10">
+              <ng-template ngx-datatable-header-template>#</ng-template>
+              <ng-template class="d-flext" let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                  {{rowIndex+1}}.
               </ng-template>
           </ngx-datatable-column>
+
+          <ngx-datatable-column prop="CATEGORY" [sortable]="true" [width]="100">
+            <ng-template ngx-datatable-header-template>Name</ng-template>
+            <ng-template class="d-flext" let-row="row" ngx-datatable-cell-template>
+                {{row?.CATEGORY}}
+            </ng-template>
+        </ngx-datatable-column>
 
             <ngx-datatable-column prop="NAME" [sortable]="true" [width]="100">
                 <ng-template ngx-datatable-header-template>Name</ng-template>
@@ -33,7 +40,7 @@
             <ngx-datatable-column prop="DESCRIPTION" [sortable]="true" [width]="100">
                 <ng-template ngx-datatable-header-template>Description</ng-template>
                 <ng-template class="d-flext" let-row="row" ngx-datatable-cell-template>
-                    {{row.DESCRIPTION ? row.DESCRIPTION : '-'}}
+                    {{row.DESCRIPTION | slice:0:12}}...
                 </ng-template>
             </ngx-datatable-column>
 

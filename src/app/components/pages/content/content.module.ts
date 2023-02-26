@@ -13,6 +13,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { CategoryService } from 'src/app/services/category/category.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SafePipe } from 'src/app/pipes/safe/safe.pipe';
+import { SharedModule } from 'src/app/shared.module';
 
 const routes : Routes = [
   { path : "", redirectTo : "list", pathMatch : "full" },
@@ -30,8 +31,7 @@ const routes : Routes = [
   declarations: [
     ContentComponent,
     CreateComponent,
-    ListComponent,
-    SafePipe
+    ListComponent
   ],
   imports: [
     CommonModule,
@@ -39,8 +39,7 @@ const routes : Routes = [
     LayoutModule,
     NgxDatatableModule,
     AngularEditorModule,
-    FormsModule,
-    ReactiveFormsModule
+    SharedModule
   ],
   providers : [ HttpService, CommonService, ContentService, CategoryService ]
 })

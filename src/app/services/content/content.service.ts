@@ -16,7 +16,15 @@ export class ContentService {
     return this._http.post(`/content`, body);
   }
 
+  update(body, CN_ID){
+    return this._http.put(`/content/${CN_ID}`, body);
+  }
+
   get(){
     return this._http.get(`/content`);
+  }
+
+  getByID(CN_ID){
+    return this._http.get(`/content/${CN_ID}`);
   }
 }

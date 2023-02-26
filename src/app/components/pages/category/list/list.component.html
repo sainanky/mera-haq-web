@@ -19,7 +19,9 @@
             <ngx-datatable-column prop="ICON_URL" [sortable]="false" [width]="30">
               <ng-template ngx-datatable-header-template>ICON</ng-template>
               <ng-template class="d-flext" let-row="row" ngx-datatable-cell-template>
-                  <img [src]="row?.ICON_URL" height="40">
+                  <div class="img-container">
+                    <img [src]="row?.ICON_URL" [style.background]="row?.COLOR" height="40">
+                  </div>
               </ng-template>
           </ngx-datatable-column>
 
@@ -40,7 +42,7 @@
             <ngx-datatable-column prop="DESCRIPTION" [sortable]="false" [width]="30">
               <ng-template ngx-datatable-header-template>Action</ng-template>
               <ng-template class="d-flext" let-row="row" ngx-datatable-cell-template>
-                  <i class="zmdi zmdi-eye"></i>
+                  <i class="zmdi zmdi-edit" routerLink="/app/category/create" [queryParams]="{'C_ID' : row?.C_ID }"></i>
               </ng-template>
           </ngx-datatable-column>
 

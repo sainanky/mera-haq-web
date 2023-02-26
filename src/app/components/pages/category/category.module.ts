@@ -9,6 +9,7 @@ import { HttpService } from 'src/app/services/http.service';
 import { CommonService } from 'src/app/services/common.service';
 import { CategoryService } from 'src/app/services/category/category.service';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { SharedModule } from 'src/app/shared.module';
 
 const routes : Routes = [
   {
@@ -42,7 +43,8 @@ const routes : Routes = [
     CommonModule,
     LayoutModule,
     RouterModule.forChild(routes),
-    NgxDatatableModule
+    NgxDatatableModule,
+    SharedModule
   ],
   providers : [
     HttpService,

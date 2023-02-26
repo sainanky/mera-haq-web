@@ -18,9 +18,12 @@ export class ListComponent {
   }
 
   getList(){
+    this.isDataLoading = true;
     this._content.get().subscribe(res=>{
-      console.log(res);
+      this.isDataLoading = false;
       this.dataArr = res['data'];
+    },err=>{
+      this.isDataLoading = false;
     })
   }
 

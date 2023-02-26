@@ -14,18 +14,21 @@
             </div>
 
             <!-- General Form Elements -->
-            <form>
+            <form [formGroup]="createForm">
               <div class="row mb-3">
                 <div class="col-lg-6 col-12">
                     <label for="inputText" class="col-form-label">Name</label>
                     <div class="">
-                        <input type="text" class="form-control">
+                        <input type="text" formControlName="NAME" class="form-control">
+                    </div>
+                    <div class="help-info" *ngIf= "NAME.touched && NAME.invalid">
+                      <span class="error" *ngIf="NAME.errors.required">please enter name</span>
                     </div>
                 </div>
                 <div class="col-lg-6 col-12">
                     <label for="inputNumber" class="col-form-label">Icon Upload</label>
                     <div class="">
-                        <input class="form-control" type="file" id="formFile">
+                      <input class="form-control" (change)="onFilePicked($event)" type="file" id="formFileBanner" accept="image/png, image/gif, image/jpeg">
                     </div>
                 </div>
               </div>
@@ -33,20 +36,24 @@
                 <div class="col-lg-6 col-12">
                   <label for="inputText" class="col-form-label">Color</label>
                   <div class="">
-                    <input type="color" class="form-control">
+                    <input type="color" formControlName="COLOR" class="form-control">
+                  </div>
+                  <div class="img-container mt-3 text-center">
+                    <img [src]="createForm?.value?.ICON_URL" [style.background]="createForm?.value?.COLOR" height="40">
                   </div>
                 </div>
                 <div class="col-lg-6 col-12">
                     <label for="inputPassword" class="col-form-label">Description</label>
                     <div class="">
-                      <textarea class="form-control" style="height: 100px"></textarea>
+                      <textarea class="form-control" formControlName="DESCRIPTION" style="height: 100px"></textarea>
                     </div>
                 </div>
               </div>
               <div class="row mb-3">
                 <div class="col-sm-12 text-center">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                  <button type="submit" class="btn btn-outline-primary ms-2">Reset</button>
+                  <button *ngIf="!C_ID" type="button" class="btn btn-primary" (click)="submit()">Submit</button>
+                  <button *ngIf="C_ID" type="button" class="btn btn-primary" (click)="update()">Update</button>
+                  <button type="button" class="btn btn-outline-primary ms-2">Reset</button>
                 </div>
               </div>
 

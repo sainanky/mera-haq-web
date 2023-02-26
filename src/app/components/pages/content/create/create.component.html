@@ -169,7 +169,8 @@
               </div>
               <div class="row mb-3">
                 <div class="col-sm-12 text-center">
-                  <button type="button" class="btn btn-primary" (click)="submit()">Submit</button>
+                  <button *ngIf="!CN_ID" type="button" class="btn btn-primary" (click)="submit()">Submit</button>
+                  <button *ngIf="CN_ID" type="button" class="btn btn-primary" (click)="update()">Update</button>
                   <button type="button" class="btn btn-outline-primary ms-2">Reset</button>
                 </div>
               </div>

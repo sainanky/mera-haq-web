@@ -9,3 +9,6 @@
 .text-right{
     text-align: right;
 }
+.ngx-datatable.scroll-horz .datatable-body{
+    overflow-x: auto;
+}

@@ -6,6 +6,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { LayoutModule } from '../layout/layout.module';
 import { CategoryModule } from './category/category.module';
 import { ContentModule } from './content/content.module';
+import { UsersModule } from './users/users.module';
 
 const routes : Routes = [
   {
@@ -20,6 +21,7 @@ const routes : Routes = [
       { path : "dashboard", loadChildren : () => DashboardModule },
       { path : "category", loadChildren : () => CategoryModule },
       { path : "content", loadChildren : () => ContentModule },
+      { path : "users", loadChildren : () => UsersModule },
     ]
   }
 ];

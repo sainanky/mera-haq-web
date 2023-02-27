@@ -1,0 +1,8 @@
+.form-flex-row{
+    display: flex;
+    column-gap: 20px;
+    align-items: center;
+    .height-fit-content{
+        height: fit-content;
+    }
+}

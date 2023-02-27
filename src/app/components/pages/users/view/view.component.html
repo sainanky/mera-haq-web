@@ -1,0 +1,78 @@
+<section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+                <div class="col-lg-6 col-12">
+                    <h5 class="card-title">View Details</h5>
+                </div>
+                <div class="col-lg-6 col-12 text-right mt-2">
+                    <button type="submit" class="btn btn-outline-primary" routerLink="/app/users/list">Back</button>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-lg-4 col-12 form-flex-row">
+                  <label class="col-form-label">Name :</label>
+                  <label class="col-form-label">{{userInfo?.NAME}}</label>
+                </div>
+                <div class="col-lg-4 col-12 form-flex-row">
+                    <label class="col-form-label">Mobile : </label>
+                    <label class="col-form-label">{{userInfo?.MOBILE}}</label>
+                </div>
+                <div class="col-lg-4 col-12 form-flex-row">
+                    <label class="col-form-label">Email : </label>
+                    <label class="col-form-label">{{userInfo?.EMAIL}}</label>
+                </div>
+                <div class="col-lg-4 col-12 form-flex-row">
+                    <label class="col-form-label">Gender : </label>
+                    <label class="col-form-label">{{userInfo?.GENDER}}</label>
+                </div>
+                <div class="col-lg-4 col-12 form-flex-row">
+                    <label class="col-form-label">Age : </label>
+                    <label class="col-form-label">{{userInfo?.AGE}}</label>
+                </div>
+                <div class="col-lg-4 col-12 form-flex-row">
+                    <label class="col-form-label">City : </label>
+                    <label class="col-form-label">{{userInfo?.CITY}}</label>
+                </div>
+                <div class="col-lg-4 col-12 form-flex-row">
+                    <label class="col-form-label">State : </label>
+                    <label class="col-form-label">{{userInfo?.STATE}}</label>
+                </div>
+                <div class="col-lg-4 col-12 form-flex-row">
+                    <label class="col-form-label">Country : </label>
+                    <label class="col-form-label">{{userInfo?.COUNTRY}}</label>
+                </div>
+                <div class="col-lg-4 col-12 form-flex-row">
+                    <label class="col-form-label">PINCODE : </label>
+                    <label class="col-form-label">{{userInfo?.PINCODE}}</label>
+                </div>
+                <div class="col-lg-4 col-12 form-flex-row">
+                    <label class="col-form-label">Paid : </label>
+                    <button *ngIf="userInfo?.IS_PAID == '1'" class="badge btn btn-success height-fit-content">Active</button>
+                    <button *ngIf="userInfo?.IS_PAID == '0'" class="badge btn btn-danger height-fit-content">Inactive</button>
+                </div>
+                <div class="col-lg-4 col-12 form-flex-row">
+                    <label class="col-form-label">Status : </label>
+                    <button *ngIf="userInfo?.IS_ACTIVE == '1'" class="badge btn btn-success height-fit-content">Active</button>
+                    <button *ngIf="userInfo?.IS_ACTIVE == '0'" class="badge btn btn-danger height-fit-content">Inactive</button>
+                </div>
+                <div class="col-lg-4 col-12 form-flex-row">
+                    <label class="col-form-label">Ref. By. : </label>
+                    <label class="col-form-label">{{userInfo?.REF_USER_NAME}}</label>
+                </div>
+                <div class="col-lg-4 col-12 form-flex-row">
+                    <label class="col-form-label">Address : </label>
+                    <label class="col-form-label">{{userInfo?.ADDRESS}}</label>
+                </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+</section>

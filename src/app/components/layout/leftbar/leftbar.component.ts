@@ -11,5 +11,6 @@ export class LeftbarComponent {
     { name : "Dashboard", url : "/app/dashboard", icon : "bi bi-grid" },
     { name : "Category", url : "/app/category", icon : "bi bi-journal-text" },
     { name : "Content", url : "/app/content", icon : "bi bi-layout-text-window-reverse" },
+    { name : "Users", url : "/app/users", icon : "bi bi-people" },
   ];
 }

@@ -1,0 +1,72 @@
+<section class="section">
+    <div class="row">
+      <div class="col-lg-12 text-right mb-3">
+        <button class="btn btn-primary" routerLink="/app/users/create">Create</button>
+      </div>
+      <div class="col-12">
+        <ngx-datatable
+            class="material poke-table"
+            [rows]="dataArr"
+            [loadingIndicator]="isDataLoading"
+            [columnMode]="'force'"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            rowHeight="auto"
+            [limit]="10"
+            [scrollbarH]="true"
+            [reorderable]="true">
+
+            <ngx-datatable-column prop="NAME" [sortable]="true" [width]="20">
+              <ng-template ngx-datatable-header-template>#</ng-template>
+              <ng-template class="d-flext" let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                  {{rowIndex+1}}.
+              </ng-template>
+          </ngx-datatable-column>
+
+            <ngx-datatable-column prop="NAME" [sortable]="true" [width]="100">
+                <ng-template ngx-datatable-header-template>Name</ng-template>
+                <ng-template class="d-flext" let-row="row" ngx-datatable-cell-template>
+                    {{row?.NAME}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column prop="MOBILE" [sortable]="true" [width]="100">
+                <ng-template ngx-datatable-header-template>Mobile</ng-template>
+                <ng-template class="d-flext" let-row="row" ngx-datatable-cell-template>
+                    {{row?.MOBILE}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column prop="EMAIL" [sortable]="true">
+                <ng-template ngx-datatable-header-template>Email</ng-template>
+                <ng-template class="d-flext" let-row="row" ngx-datatable-cell-template>
+                    {{row.EMAIL}}...
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column prop="IS_ACTIVE" [sortable]="false" [width]="50">
+                <ng-template ngx-datatable-header-template>Status</ng-template>
+                <ng-template class="d-flext" let-row="row" ngx-datatable-cell-template>
+                    <button *ngIf="row?.IS_ACTIVE == '1'" class="badge btn btn-success">Active</button>
+                    <button *ngIf="row?.IS_ACTIVE == '0'" class="badge btn btn-danger">Inactive</button>
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column prop="IS_PAID" [sortable]="false" [width]="30">
+              <ng-template ngx-datatable-header-template>Paid</ng-template>
+              <ng-template class="d-flext" let-row="row" ngx-datatable-cell-template>
+                <button *ngIf="row?.IS_PAID == '1'" class="badge btn btn-success">Active</button>
+                <button *ngIf="row?.IS_PAID == '0'" class="badge btn btn-danger">Inactive</button>
+              </ng-template>
+          </ngx-datatable-column>
+            <ngx-datatable-column [sortable]="false" [width]="20">
+                <ng-template ngx-datatable-header-template>Action</ng-template>
+                <ng-template class="d-flext" let-row="row" ngx-datatable-cell-template>
+                    <i class="zmdi zmdi-edit" routerLink="/app/users/view" [queryParams]="{'U_ID' : row?.U_ID }"></i>
+                </ng-template>
+            </ngx-datatable-column>
+
+        </ngx-datatable>
+      </div>
+    </div>
+</section>

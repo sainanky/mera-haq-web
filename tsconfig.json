@@ -16,13 +16,12 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": false,
-    "target": "es5",
+    "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
     "lib": [
       "ES2022",
-      "dom",
-      "es5"
+      "dom"
     ]
   },
   "angularCompilerOptions": {

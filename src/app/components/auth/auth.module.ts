@@ -6,6 +6,7 @@ import { HttpService } from 'src/app/services/http.service';
 import { CommonService } from 'src/app/services/common.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { WindowService } from 'src/app/services/window/window.service';
 
 const routes : Routes = [
   {
@@ -24,6 +25,6 @@ const routes : Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
-  providers : [HttpService, CommonService, AuthService]
+  providers : [WindowService, HttpService, CommonService, AuthService]
 })
 export class AuthModule { }

@@ -13,6 +13,14 @@ export class UsersService {
   }
 
   getInfo(U_ID){
-    return this._http.get(`/user/info/${U_ID}`);
+    return this._http.get(`/user/info?U_ID=${U_ID}`);
+  }
+
+  getInfoByMobile(MOBILE){
+    return this._http.get(`/user/info?MOBILE=${MOBILE}`);
+  }
+
+  getInfoByEmail(EMAIL){
+    return this._http.get(`/user/info?EMAIL=${EMAIL}`);
   }
 }

@@ -10,7 +10,7 @@ import { getAuth, RecaptchaVerifier } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { environment } from 'src/environments/environment';
 
-const firebaseConfig = environment.firebase
+const firebaseConfig = environment.firebase;
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -26,13 +26,13 @@ export class AuthComponent {
     private win: WindowService, public afs: AngularFirestore,
     public afAuth: AngularFireAuth,){}
   mobile : string = '';
-  msg_id : string = '';
-  otp_msg : string = '';
   isApiLoading : boolean = false;
   countDown:Subscription;
   counter = 0;
   tick = 1000;
   windowRef: any;
+  msg_id : string = '';
+  otp_msg : string = '';
 
   ngOnInit(){
     this.windowRef = this.win.windowRef;
@@ -48,16 +48,32 @@ export class AuthComponent {
 
   sendOtp(){
     let mobile = "+91" + this.mobile
-    let obj = { mobile };
+    const appVerifier = this.windowRef.recaptchaVerifier;
     this.msg_id = '';
-    this.otp_msg = '';
+    this.isApiLoading = true;
+    this.afAuth.signInWithPhoneNumber(mobile, appVerifier)
+    .then((result : any) => {
+      this.windowRef.confirmationResult = result;
+      this.msg_id = result;
+      this.startCountdown();
+      this._common.showToastr("success", `We have sent verification code to ${mobile}`);
+      this.isApiLoading = false;
+    })
+    .catch( (error : any) => {
+      console.log(error);
+      this.isApiLoading = false;
+      this._common.showToastr("error", "Exceeded per phone number quota for sending verification codes");
+    });
+  }
+
+  submit(){
+    let mobile = "+91" + this.mobile
+    let obj = { mobile };
     this.isApiLoading = true;
     this._auth.sendOtp(obj).subscribe(res=>{
       this.isApiLoading = false;
-      this._common.showToastr("success", "OTP Sent Successfully...");
+      // this.sendOtp(mobile);
       this.startCountdown();
-      this.msg_id = res['msg_id'];
-      this.otp_msg = res['otp'];
     }, err=>{
       this.isApiLoading = false;
       this._common.showToastr("error", err.error.message);
@@ -65,13 +81,33 @@ export class AuthComponent {
   }
 
   verifyOtp(){
-    let mobile = "+91" + this.mobile
-    let obj = { 
-      mobile, 
-      msg_id : this.msg_id,
-      otp : this.otp_msg
-     };
-     this.isApiLoading = true;
+    let mobile = "+91" + this.mobile;
+    this.windowRef.confirmationResult
+    .confirm(this.otp_msg)
+    .then( (result : any) => {
+      let user = {
+        mobile : mobile,
+        uid : result.user.uid,
+        accessToken : result.user._delegate.accessToken,
+        refreshToken: result.user._delegate.refreshToken
+      }
+      this.updateOTP(user);
+      // this._common.showToastr("success", `Code Verified Successfully`);
+      localStorage.setItem("uid", user.uid);
+      localStorage.setItem("token", user.accessToken);
+      // localStorage.setItem("refreshToken", this.user.refreshToken);
+      // setTimeout(() => {
+      //   this._common.showToastr("success", "logged in successfully...");
+      //   this._router.navigateByUrl('/');
+      // }, 1000);
+    })
+    .catch( (error : any) => {
+      this._common.showToastr("error", "Incorrect code entered");
+    });
+  }
+
+  updateOTP(obj){
+    this.isApiLoading = true;
     this._auth.verifyOtp(obj).subscribe(res=>{
       this.isApiLoading = false;
       this._common.showToastr("success", "OTP Verified Successfully...");

@@ -1,8 +1,12 @@
 export const environment = {
   production: true,
-  url : 'https://api.finanvo.in',
-  apiKey : '8i1gNe4cIU',
-  apiSecretKey : 'ponaryoVPXAwZQkaLZTF4scER57BbJAkftyQCpM3',
-  defaultImage : 'https://via.placeholder.com/100x100.png',
-  payment_api_url : 'https://payment.finanvo.in'
+  url : 'https://api.merahaq.techymojo.in',
+  firebase: {
+    apiKey: "AIzaSyAWEmnezxRR0RCKK0DJH7ifhckKwx4hGxo",
+    authDomain: "m-haq-403cc.firebaseapp.com",
+    projectId: "m-haq-403cc",
+    storageBucket: "m-haq-403cc.appspot.com",
+    messagingSenderId: "251934513075",
+    appId: "1:251934513075:web:44de64a6394294038a1dc6"
+  }
 };

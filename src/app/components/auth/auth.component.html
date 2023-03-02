@@ -36,7 +36,7 @@
                     <div *ngIf="msg_id" class="col-12">
                       <label for="yourPassword" class="form-label otp-label">
                         <span>OTP</span>
-                        <span class="otp-resend" [ngClass]="{'opacity-50' : counter > 0}">Resend OTP <span *ngIf="counter > 0">in {{counter}} Sec</span></span>
+                        <span (click)="sendOtp()" class="otp-resend" [ngClass]="{'opacity-50' : counter > 0}">Resend OTP <span *ngIf="counter > 0">in {{counter}} Sec</span></span>
                       </label>
                       <input type="password" name="password" [(ngModel)]="otp_msg" class="form-control" id="yourPassword" required>
                       <div class="invalid-feedback">Please enter your otp!</div>

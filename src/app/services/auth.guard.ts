@@ -29,6 +29,7 @@ export class AuthGuard implements CanActivate {
         }
       },err=>{
         console.log("erroe =", err)
+        this._common.showToastr("error", "Sorry session expired");
       })
     );
   }

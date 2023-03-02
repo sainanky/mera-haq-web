@@ -31,6 +31,7 @@ export class HttpService {
         headers: new HttpHeaders({
           'Content-Type':  'application/json',
           'app-origin' : window.location.origin,
+          'app-source' : "web",
           'Authorization': localStorage.getItem('token') ? localStorage.getItem('token') : '',
           'VisitorID' : '',
           'IpAddress' : ''
@@ -53,6 +54,7 @@ export class HttpService {
         headers: new HttpHeaders({
           'Content-Type':  'application/json',
           'app-origin' : window.location.origin,
+          'app-source' : "web",
           'Authorization': localStorage.getItem('token') ? localStorage.getItem('token') : '',
           'VisitorID' : '',
           'IpAddress' : ''
@@ -75,6 +77,7 @@ export class HttpService {
         headers: new HttpHeaders({
           'Content-Type':  'application/json',
           'app-origin' : window.location.origin,
+          'app-source' : "web",
           'Authorization': localStorage.getItem('token') ? localStorage.getItem('token') : '',
           'VisitorID' : '',
           'IpAddress' : ''
@@ -97,6 +100,7 @@ export class HttpService {
         headers: new HttpHeaders({
           'Content-Type':  'application/json',
           'app-origin' : window.location.origin,
+          'app-source' : "web",
           'Authorization': localStorage.getItem('token') ? localStorage.getItem('token') : '',
           'VisitorID' : '',
           'IpAddress' : ''
@@ -119,6 +123,7 @@ export class HttpService {
           'x-api-key' : 'trademark',
           'x-api-secret-key' : '469d074a74681db677d64e1e69feb77ae9a5e85ba5dfa690a9efa4ac09959e9b',
           'Authorization': localStorage.getItem('token') ? localStorage.getItem('token') : '',
+          'app-source' : "web",
           'VisitorID' : '',
           'IpAddress' : ''
         }),

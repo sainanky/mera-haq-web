@@ -82,6 +82,7 @@ export class AuthComponent {
 
   verifyOtp(){
     let mobile = "+91" + this.mobile;
+    this.isApiLoading = true;
     this.windowRef.confirmationResult
     .confirm(this.otp_msg)
     .then( (result : any) => {
@@ -92,16 +93,11 @@ export class AuthComponent {
         refreshToken: result.user._delegate.refreshToken
       }
       this.updateOTP(user);
-      // this._common.showToastr("success", `Code Verified Successfully`);
       localStorage.setItem("uid", user.uid);
       localStorage.setItem("token", user.accessToken);
-      // localStorage.setItem("refreshToken", this.user.refreshToken);
-      // setTimeout(() => {
-      //   this._common.showToastr("success", "logged in successfully...");
-      //   this._router.navigateByUrl('/');
-      // }, 1000);
     })
     .catch( (error : any) => {
+      this.isApiLoading = false;
       this._common.showToastr("error", "Incorrect code entered");
     });
   }

@@ -13,7 +13,7 @@ export class AuthService {
   }
 
   verifyOtp(obj){
-    return this._http.post(`/user/check-admin-otp`, obj);
+    return this._http.post(`/user/check-otp`, obj);
   }
 
   verifyToken(){

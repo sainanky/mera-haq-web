@@ -16,9 +16,9 @@ export class ViewComponent {
 
   ngOnInit(){
     this._route.queryParams.subscribe(res=>{
-      let { U_ID } = res;
-      if(U_ID){
-        this.U_ID = U_ID;
+      let { UID } = res;
+      if(UID){
+        this.U_ID = UID;
         this.getInfo();
       }
     });

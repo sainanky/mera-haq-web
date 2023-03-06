@@ -7,6 +7,7 @@ import { LayoutModule } from '../layout/layout.module';
 import { CategoryModule } from './category/category.module';
 import { ContentModule } from './content/content.module';
 import { UsersModule } from './users/users.module';
+import { ConfigModule } from './config/config.module';
 
 const routes : Routes = [
   {
@@ -22,6 +23,7 @@ const routes : Routes = [
       { path : "category", loadChildren : () => CategoryModule },
       { path : "content", loadChildren : () => ContentModule },
       { path : "users", loadChildren : () => UsersModule },
+      { path : "config", loadChildren : () => ConfigModule },
     ]
   }
 ];

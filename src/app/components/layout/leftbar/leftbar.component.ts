@@ -12,5 +12,6 @@ export class LeftbarComponent {
     { name : "Category", url : "/app/category", icon : "bi bi-journal-text" },
     { name : "Content", url : "/app/content", icon : "bi bi-layout-text-window-reverse" },
     { name : "Users", url : "/app/users", icon : "bi bi-people" },
+    { name : "Config", url : "/app/config", icon : "bi bi-wrench-adjustable" },
   ];
 }

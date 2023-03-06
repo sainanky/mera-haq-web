@@ -1,0 +1,21 @@
+.flex-row{
+    display: flex;
+    column-gap: 10px;
+}
+
+.flex-img-row{
+    display: flex;
+    column-gap: 5px;
+    row-gap: 5px;
+    margin-top: 10px;
+    flex-wrap: inherit;
+    .img-wrapper{
+        width: 100%;
+        position: relative;
+        i{
+            position: absolute;
+            right: -5px;
+            top: 0;
+        }
+    }
+}

@@ -1,2 +1,134 @@
-<app-breadcrumb title="Users"></app-breadcrumb>
-<router-outlet></router-outlet>
+<app-breadcrumb title="Config"></app-breadcrumb>
+
+<section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+
+        <div class="card">
+          <div class="card-body">
+
+            <!-- General Form Elements -->
+            <form [formGroup]="configForm">
+
+                <div class="row mb-3 mt-3">
+                    <div class="col-lg-12 col-12">
+                        <label for="inputText" class="col-form-label">Homepage Notification Updates</label>
+                        <div class="">
+                            <input type="text" formControlName="HOME_PAGE_NOTIFICATION_MSG" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+              <div class="row mb-3">
+                <div class="col-lg-6 col-12">
+                    <label for="inputText" class="col-form-label">Registration Amount</label>
+                    <div class="">
+                        <input type="text" formControlName="REGISTRATION_AMOUNT" class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-12">
+                    <label for="inputNumber" class="col-form-label">Registration GST Percentage</label>
+                    <div class="">
+                        <input type="text" formControlName="REGISTRATION_GST_PERCENTAGE" class="form-control">
+                    </div>
+                </div>
+              </div>
+              
+              <div class="row mb-4">
+                <div class="col-lg-6 col-12">
+                    <label for="inputText" class="col-form-label">Referred By Amount</label>
+                    <div class="">
+                        <input type="text" formControlName="REF_BY_AMOUNT" class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-12">
+                    <label for="inputNumber" class="col-form-label">Referred To Amount</label>
+                    <div class="">
+                        <input type="text" formControlName="REF_TO_AMOUNT" class="form-control">
+                    </div>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-header">Login Page Sliders</div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-12 flex-row">
+                                    <input class="form-control" (change)="onFilePicked($event, 'login')" type="file" id="formFileLogin" accept="image/png, image/gif, image/jpeg, image/jpg">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 flex-img-row">
+                                    <div class="img-wrapper" *ngFor="let item of loginSliderImgArr; let i = index;">
+                                        <img [src]="item">
+                                        <i class="zmdi zmdi-close" (click)="removeSliderImage(i, 'login')"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-header">Gift Page Sliders</div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-12 flex-row">
+                                    <input class="form-control" (change)="onFilePicked($event, 'gift')" type="file" id="formFileGift" accept="image/png, image/gif, image/jpeg, image/jpg">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 flex-img-row">
+                                    <div class="img-wrapper" *ngFor="let item of giftSliderImgArr; let i = index;">
+                                        <img [src]="item">
+                                        <i class="zmdi zmdi-close" (click)="removeSliderImage(i, 'gift')"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-header">Homepage After login Page Slider</div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-12 flex-row">
+                                    <input class="form-control" (change)="onFilePicked($event, 'home')" type="file" id="formFileHome" accept="image/png, image/gif, image/jpeg, image/jpg">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 flex-img-row">
+                                    <div class="img-wrapper" *ngFor="let item of homeSliderImgArr; let i = index;">
+                                        <img [src]="item">
+                                        <i class="zmdi zmdi-close" (click)="removeSliderImage(i, 'home')"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              
+              <div class="row mb-3">
+                <div class="col-sm-12 text-center">
+                  <button *ngIf="!isApiLoadig" type="button" class="btn btn-primary" (click)="submit()">Submit</button>
+                  <button *ngIf="isApiLoadig" type="button" class="btn btn-primary">
+                    <i class="zmdi zmdi-spinner fa-spin"></i>
+                  </button>
+                  <button type="button" class="btn btn-outline-primary ms-2">Reset</button>
+                </div>
+              </div>
+
+            </form><!-- End General Form Elements -->
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+</section>

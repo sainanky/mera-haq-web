@@ -20,6 +20,7 @@ export class ViewComponent {
       if(UID){
         this.U_ID = UID;
         this.getInfo();
+        this.getRefInfo();
       }
     });
   }
@@ -31,6 +32,12 @@ export class ViewComponent {
         let { data } = res;
         this.userInfo = data;
       }
+    })
+  }
+
+  getRefInfo(){
+    this._users.getRefInfo(this.U_ID).subscribe(res=>{
+      console.log(res);
     })
   }
 }

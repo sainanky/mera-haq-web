@@ -12,8 +12,8 @@ export class AppComponent {
   constructor(private _router : Router){}
 
   ngOnInit(){
-    if(location.pathname == '/' && localStorage.token != ''){
-      this._router.navigateByUrl('/app/dashboard');
-    }
+    // if(location.pathname == '/' && localStorage.token != ''){
+    //   this._router.navigateByUrl('/app/dashboard');
+    // }
   }
 }

@@ -23,4 +23,8 @@ export class UsersService {
   getInfoByEmail(EMAIL){
     return this._http.get(`/user/info?EMAIL=${EMAIL}`);
   }
+
+  getRefInfo(UID){
+    return this._http.get(`/user/referral/info/${UID}`);
+  }
 }

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { LoadingBarService } from '@ngx-loading-bar/core';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject } from 'rxjs';
@@ -10,7 +11,7 @@ declare var $ : any;
 })
 export class CommonService {
 
-  constructor(private toastr: ToastrService) { }
+  constructor(private toastr: ToastrService, private loadingBar :LoadingBarService,) { }
 
   private loggedInUserSource = new BehaviorSubject(false);
   currentLoggedInUserSource = this.loggedInUserSource.asObservable();
@@ -24,6 +25,11 @@ export class CommonService {
 
   toggleSubMenuPage(status: string) {
     this.isSubMenuPageSource.next(status)
+  }
+
+  toggleProgressLoader(activated){
+    if(activated) this.loadingBar.start();
+    else this.loadingBar.stop();
   }
 
   showToastr(type, message) {

@@ -12,10 +12,15 @@
     .img-wrapper{
         width: 100%;
         position: relative;
+        img{
+            width: inherit;
+        }
         i{
             position: absolute;
-            right: -5px;
+            right: -15px;
             top: 0;
+            font-size: 20px;
+            font-weight: bold;
         }
     }
 }

@@ -40,12 +40,19 @@ export class ConfigComponent {
     if (!fileObj) {
       return false;
     }
+    this._common.toggleProgressLoader(true);
+    this._common.showToastr("info", "upload starting...");
     const fileForm = new FormData();
     fileForm.append('file', fileObj);
     this._content.fileUpload(fileForm).subscribe(res => {
+      this._common.toggleProgressLoader(false);
+      this._common.showToastr("success", "uploaded successfully...");
       if(type == 'login') this.loginSliderImgArr.push(res['imageUrl']);
       else if(type == 'gift') this.giftSliderImgArr.push(res['imageUrl']);
       else if(type == 'home') this.homeSliderImgArr.push(res['imageUrl']);
+    },err=>{
+      this._common.toggleProgressLoader(false);
+      this._common.showToastr("error", "some error ocurred");
     });
   }
 
@@ -56,8 +63,9 @@ export class ConfigComponent {
   }
 
   getData(){
+    this._common.toggleProgressLoader(true);
     this._config.get().subscribe(res=>{
-      console.log(res);
+      this._common.toggleProgressLoader(false);
       let { data } = res;
       if(Object.keys(data).length > 0){
         this.configForm.controls.REGISTRATION_AMOUNT.setValue(data['REGISTRATION_AMOUNT']);
@@ -69,6 +77,8 @@ export class ConfigComponent {
         if(data['GIFT_PAGE_SLIDER']) this.giftSliderImgArr = data['GIFT_PAGE_SLIDER'];
         if(data['HOME_PAGE_SLIDER']) this.homeSliderImgArr = data['HOME_PAGE_SLIDER'];
       }
+    },err=>{
+      this._common.toggleProgressLoader(false);
     })
   }
 
@@ -78,11 +88,14 @@ export class ConfigComponent {
     values.GIFT_PAGE_SLIDER = this.giftSliderImgArr.length > 0 ? this.giftSliderImgArr.join(',') : '';
     values.HOME_PAGE_SLIDER = this.homeSliderImgArr.length > 0 ? this.homeSliderImgArr.join(',') : '';
     this.isApiLoadig = true;
+    this._common.toggleProgressLoader(true);
     this._config.update(values).subscribe(res=>{
       this.isApiLoadig = false;
+      this._common.toggleProgressLoader(false);
       this._common.showToastr("success", "Updated");
     },err=>{
       this.isApiLoadig = false;
+      this._common.toggleProgressLoader(false);
       this._common.showToastr("error", "Sorry some error occurred...");
     })
   }

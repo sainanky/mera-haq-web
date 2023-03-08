@@ -22,6 +22,7 @@
     "@kolkov/angular-editor": "^3.0.0-beta.0",
     "@kurkle/color": "^0.3.2",
     "@ng-bootstrap/ng-bootstrap": "^14.0.1",
+    "@ngx-loading-bar/core": "^6.0.2",
     "@popperjs/core": "^2.11.6",
     "@swimlane/ngx-datatable": "^20.1.0",
     "bootstrap": "^5.2.3",

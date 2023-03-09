@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="col-12">
-                      <button *ngIf="!msg_id && !isApiLoading" class="btn btn-primary w-100" type="button" (click)="sendOtp()">Send OTP</button>
+                      <button *ngIf="!msg_id && !isApiLoading" class="btn btn-primary w-100" type="button" (click)="submit()">Send OTP</button>
                       <button *ngIf="msg_id && !isApiLoading" class="btn btn-primary w-100" type="button" (click)="verifyOtp()">Verify OTP</button>
                       <button *ngIf="isApiLoading" class="btn btn-primary w-100" type="button">
                         <i class="zmdi zmdi-spinner fa-spin"></i>

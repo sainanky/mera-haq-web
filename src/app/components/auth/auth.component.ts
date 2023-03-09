@@ -35,15 +35,15 @@ export class AuthComponent {
   otp_msg : string = '';
 
   ngOnInit(){
-    this.windowRef = this.win.windowRef;
-    this.windowRef.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
-      'size': 'invisible',
-      'callback': (response) => {
-        console.log("response =", response)
-      }
-    }, auth);
+    // this.windowRef = this.win.windowRef;
+    // this.windowRef.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
+    //   'size': 'invisible',
+    //   'callback': (response) => {
+    //     console.log("response =", response)
+    //   }
+    // }, auth);
 
-    this.windowRef.recaptchaVerifier.render();
+    // this.windowRef.recaptchaVerifier.render();
   }
 
   sendOtp(){
@@ -67,13 +67,16 @@ export class AuthComponent {
   }
 
   submit(){
-    let mobile = "+91" + this.mobile
+    let mobile = this.mobile
     let obj = { mobile };
     this.isApiLoading = true;
     this._auth.sendOtp(obj).subscribe(res=>{
       this.isApiLoading = false;
       // this.sendOtp(mobile);
+      this.msg_id = res['msg_id'];
       this.startCountdown();
+      this._common.showToastr("success", `We have sent verification code to ${mobile}`);
+      this.isApiLoading = false;
     }, err=>{
       this.isApiLoading = false;
       this._common.showToastr("error", err.error.message);
@@ -81,29 +84,11 @@ export class AuthComponent {
   }
 
   verifyOtp(){
-    let mobile = "+91" + this.mobile;
     this.isApiLoading = true;
-    this.windowRef.confirmationResult
-    .confirm(this.otp_msg)
-    .then( (result : any) => {
-      let user = {
-        mobile : mobile,
-        uid : result.user.uid,
-        accessToken : result.user._delegate.accessToken,
-        refreshToken: result.user._delegate.refreshToken
-      }
-      this.updateOTP(user);
-      localStorage.setItem("uid", user.uid);
-      localStorage.setItem("token", user.accessToken);
-    })
-    .catch( (error : any) => {
-      this.isApiLoading = false;
-      this._common.showToastr("error", "Incorrect code entered");
-    });
-  }
-
-  updateOTP(obj){
-    this.isApiLoading = true;
+    let obj = {
+      msg_id : this.msg_id,
+      code : this.otp_msg
+    }
     this._auth.verifyOtp(obj).subscribe(res=>{
       this.isApiLoading = false;
       this._common.showToastr("success", "OTP Verified Successfully...");

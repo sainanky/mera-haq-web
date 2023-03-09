@@ -76,17 +76,21 @@ export class CreateComponent {
   currAttcIndex : number = 0;
   currYoutubeIndex : number = 0;
   CN_ID : string = '';
+  isApiLoading : boolean = false;
+  stateArr : any = [];
 
   ngOnInit(){
     this.getCategory();
+    this.getStates();
     this.createForm = this.fb.group({
       CATEGORY : new FormControl('', Validators.required),
       NAME : new FormControl('', Validators.required),
-      DESCRIPTION : new FormControl('', Validators.required),
+      DESCRIPTION : new FormControl(''),
       IS_FEATURED : false,
       BANNER_IMG : '',
       ATTACHMENTS : this.fb.array([]),
       YOUTUBE_LINKS : this.fb.array([]),
+      STATE : '',
     });
 
     this._route.queryParams.subscribe(res=>{
@@ -143,11 +147,18 @@ export class CreateComponent {
       this.errorMsg = true
       return
     }
+    this._common.toggleProgressLoader(true);
+    this._common.showToastr("info", "uploading started");
     const fileForm = new FormData();
     fileForm.append('file', this.fileObj);
     this._content.fileUpload(fileForm).subscribe(res => {
+      this._common.toggleProgressLoader(false);
+      this._common.showToastr("success", "uploading finished");
       if(idx == 'banner') this.createForm.controls.BANNER_IMG.setValue(res['imageUrl']);
       else this.ATTACHMENTS.controls[idx]['controls']['URL'].setValue(res['imageUrl']);
+    },err=>{
+      this._common.toggleProgressLoader(false);
+      this._common.showToastr("error", "uploading failed");
     });
   }
 
@@ -202,7 +213,7 @@ export class CreateComponent {
     if(!this.createForm.valid){
       this._common.showToastr("error", "Please fill form correctly...");
     }
-    let { CATEGORY, NAME, DESCRIPTION, IS_FEATURED, BANNER_IMG, ATTACHMENTS, YOUTUBE_LINKS } = this.createForm.value;
+    let { CATEGORY, NAME, DESCRIPTION, IS_FEATURED, BANNER_IMG, ATTACHMENTS, YOUTUBE_LINKS, STATE } = this.createForm.value;
     let attachmentArr = [], youtubeLinksArr = [];
     if(ATTACHMENTS.length > 0){
       for(let i = 0; i < ATTACHMENTS.length; i++){
@@ -223,9 +234,14 @@ export class CreateComponent {
       IS_FEATURED : IS_FEATURED ? 1 : 0,
       BANNER_IMG : BANNER_IMG,
       ATTACHMENTS : attachmentArr, 
-      YOUTUBE_LINKS : youtubeLinksArr 
+      YOUTUBE_LINKS : youtubeLinksArr,
+      STATE
     };
+    this._common.toggleProgressLoader(true);
+    this.isApiLoading = true;
     this._content.save(obj).subscribe(res=>{
+      this._common.toggleProgressLoader(false);
+      this.isApiLoading = false;
       this._common.showToastr("success", "Saved Successfully...");
       this.createForm.reset();
       setTimeout(() => {
@@ -233,6 +249,8 @@ export class CreateComponent {
       }, 1500);
     },err=>{
       console.log(err);
+      this._common.toggleProgressLoader(false);
+      this.isApiLoading = false;
       this._common.showToastr("error", err.error.message);
     })
   }
@@ -241,7 +259,7 @@ export class CreateComponent {
     // if(!this.createForm.valid){
     //   this._common.showToastr("error", "Please fill form correctly...");
     // }
-    let { CATEGORY, NAME, DESCRIPTION, IS_FEATURED, BANNER_IMG, ATTACHMENTS, YOUTUBE_LINKS } = this.createForm.value;
+    let { CATEGORY, NAME, DESCRIPTION, IS_FEATURED, BANNER_IMG, ATTACHMENTS, YOUTUBE_LINKS, STATE } = this.createForm.value;
     let attachmentArr = [], youtubeLinksArr = [];
     if(ATTACHMENTS.length > 0){
       for(let i = 0; i < ATTACHMENTS.length; i++){
@@ -262,9 +280,14 @@ export class CreateComponent {
       IS_FEATURED : IS_FEATURED ? 1 : 0,
       BANNER_IMG : BANNER_IMG,
       ATTACHMENTS : attachmentArr, 
-      YOUTUBE_LINKS : youtubeLinksArr 
+      YOUTUBE_LINKS : youtubeLinksArr,
+      STATE
     };
+    this._common.toggleProgressLoader(true);
+    this.isApiLoading = true;
     this._content.update(obj, this.CN_ID).subscribe(res=>{
+      this._common.toggleProgressLoader(false);
+      this.isApiLoading = false;
       this._common.showToastr("success", "Updated Successfully...");
       this.createForm.reset();
       setTimeout(() => {
@@ -272,12 +295,16 @@ export class CreateComponent {
       }, 1500);
     },err=>{
       console.log(err);
+      this._common.toggleProgressLoader(false);
+      this.isApiLoading = false;
       this._common.showToastr("error", err.error.message);
     })
   }
 
   getInfo(){
+    this._common.toggleProgressLoader(true);
     this._content.getByID(this.CN_ID).subscribe(res=>{
+      this._common.toggleProgressLoader(false);
       if(res['data']){
         let { data } = res;
         this.createForm.controls.CATEGORY.setValue(data.C_ID);
@@ -285,6 +312,7 @@ export class CreateComponent {
         this.createForm.controls.IS_FEATURED.setValue(data.IS_FEATURED == 1 ? true : false);
         this.createForm.controls.BANNER_IMG.setValue(data.BANNER_IMG);
         this.createForm.controls.DESCRIPTION.setValue(data.DESCRIPTION);
+        this.createForm.controls.STATE.setValue(data.STATE);
         if(data.ATTACHMENTS.length > 0){
           for(let i = 0; i < data.ATTACHMENTS.length; i++){
             let v = data.ATTACHMENTS[i];
@@ -300,6 +328,14 @@ export class CreateComponent {
         }
         else this.addYoutube();
       }
+    },err=>{
+      this._common.toggleProgressLoader(false);
+    })
+  }
+
+  getStates(){
+    this._content.getStates().subscribe(res=>{
+      this.stateArr = res['data'];
     })
   }
 }

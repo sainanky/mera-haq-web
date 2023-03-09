@@ -27,4 +27,8 @@ export class ContentService {
   getByID(CN_ID){
     return this._http.get(`/content/${CN_ID}`);
   }
+
+  getStates(){
+    return this._http.get(`/states/list`);
+  }
 }

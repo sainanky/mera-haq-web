@@ -16,7 +16,7 @@
             <!-- General Form Elements -->
             <form [formGroup]="createForm">
               <div class="row mb-3">
-                <div class="col-lg-6 col-12">
+                <div class="col-lg-4 col-12">
                   <label for="inputNumber" class="col-form-label">Category</label>
                   <div class="">
                       <select class="form-control" formControlName="CATEGORY">
@@ -28,7 +28,7 @@
                       </div>
                   </div>
                 </div>
-                <div class="col-lg-6 col-12">
+                <div class="col-lg-4 col-12">
                     <label for="inputText" class="col-form-label">Name *</label>
                     <div class="">
                         <input type="text" class="form-control" formControlName="NAME">
@@ -36,6 +36,15 @@
                           <span class="error" *ngIf="NAME.errors.required">please enter name</span>
                        </div>
                     </div>
+                </div>
+                <div class="col-lg-4 col-12">
+                  <label for="inputNumber" class="col-form-label">State</label>
+                  <div class="">
+                      <select class="form-control" formControlName="STATE">
+                          <option value="">Select State *</option>
+                          <option *ngFor="let item of stateArr" [value]="item">{{item}}</option>
+                      </select>
+                  </div>
                 </div>
               </div>
 

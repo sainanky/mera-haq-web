@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { CategoryService } from 'src/app/services/category/category.service';
 import { CommonService } from 'src/app/services/common.service';
+import { ConfigService } from 'src/app/services/config/config.service';
 import { ContentService } from 'src/app/services/content/content.service';
 import { environment } from 'src/environments/environment';
 
@@ -66,7 +67,7 @@ export class CreateComponent {
 
   constructor(private _content : ContentService, private _category : CategoryService,
     private fb : FormBuilder, private _common : CommonService, private _router : Router,
-    private _route : ActivatedRoute){}
+    private _route : ActivatedRoute, private _config : ConfigService){}
 
   errorMsg : boolean = false;
   fileObj: File;
@@ -78,10 +79,13 @@ export class CreateComponent {
   CN_ID : string = '';
   isApiLoading : boolean = false;
   stateArr : any = [];
+  examsArr : any = [];
+  selectedCategory : any = {};
 
   ngOnInit(){
     this.getCategory();
     this.getStates();
+    this.getExams();
     this.createForm = this.fb.group({
       CATEGORY : new FormControl('', Validators.required),
       NAME : new FormControl('', Validators.required),
@@ -327,15 +331,31 @@ export class CreateComponent {
           }
         }
         else this.addYoutube();
+
+        let categoryFilter = this.categoryArr.filter(v => v.C_ID == data.C_ID);
+        if(categoryFilter.length > 0) this.selectedCategory = categoryFilter[0];
+        console.log("selected category =", this.selectedCategory)
       }
     },err=>{
       this._common.toggleProgressLoader(false);
     })
   }
 
+  onCategoryChange(val){
+    let categoryFilter = this.categoryArr.filter(v => v.C_ID == val);
+    if(categoryFilter.length > 0) this.selectedCategory = categoryFilter[0];
+    console.log("selected category =", this.selectedCategory)
+  }
+
   getStates(){
-    this._content.getStates().subscribe(res=>{
+    this._config.getStates().subscribe(res=>{
       this.stateArr = res['data'];
+    })
+  }
+
+  getExams(){
+    this._config.getExams().subscribe(res=>{
+      this.examsArr = res['data'];
     })
   }
 }

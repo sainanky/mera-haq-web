@@ -19,7 +19,7 @@
                 <div class="col-lg-4 col-12">
                   <label for="inputNumber" class="col-form-label">Category</label>
                   <div class="">
-                      <select class="form-control" formControlName="CATEGORY">
+                      <select class="form-control" formControlName="CATEGORY" (change)="onCategoryChange($event.target.value)">
                           <option value="">Select Category *</option>
                           <option *ngFor="let item of categoryArr" [value]="item?.C_ID">{{item?.NAME}}</option>
                       </select>
@@ -37,12 +37,21 @@
                        </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-12">
+                <div *ngIf="selectedCategory?.TYPE == 'states'" class="col-lg-4 col-12">
                   <label for="inputNumber" class="col-form-label">State</label>
                   <div class="">
                       <select class="form-control" formControlName="STATE">
                           <option value="">Select State *</option>
                           <option *ngFor="let item of stateArr" [value]="item">{{item}}</option>
+                      </select>
+                  </div>
+                </div>
+                <div *ngIf="selectedCategory?.TYPE == 'exams'" class="col-lg-4 col-12">
+                  <label for="inputNumber" class="col-form-label">Exams</label>
+                  <div class="">
+                      <select class="form-control" formControlName="STATE">
+                          <option value="">Select Exam *</option>
+                          <option *ngFor="let item of examsArr" [value]="item">{{item}}</option>
                       </select>
                   </div>
                 </div>

@@ -14,6 +14,7 @@ import { CategoryService } from 'src/app/services/category/category.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SafePipe } from 'src/app/pipes/safe/safe.pipe';
 import { SharedModule } from 'src/app/shared.module';
+import { ConfigService } from 'src/app/services/config/config.service';
 
 const routes : Routes = [
   { path : "", redirectTo : "list", pathMatch : "full" },
@@ -41,6 +42,6 @@ const routes : Routes = [
     AngularEditorModule,
     SharedModule
   ],
-  providers : [ HttpService, CommonService, ContentService, CategoryService ]
+  providers : [ HttpService, CommonService, ContentService, ConfigService, CategoryService ]
 })
 export class ContentModule { }

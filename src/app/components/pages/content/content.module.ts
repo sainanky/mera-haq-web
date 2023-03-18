@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SafePipe } from 'src/app/pipes/safe/safe.pipe';
 import { SharedModule } from 'src/app/shared.module';
 import { ConfigService } from 'src/app/services/config/config.service';
+import { NgxEditorModule } from 'ngx-editor';
 
 const routes : Routes = [
   { path : "", redirectTo : "list", pathMatch : "full" },
@@ -40,7 +41,8 @@ const routes : Routes = [
     LayoutModule,
     NgxDatatableModule,
     AngularEditorModule,
-    SharedModule
+    SharedModule,
+    NgxEditorModule
   ],
   providers : [ HttpService, CommonService, ContentService, ConfigService, CategoryService ]
 })

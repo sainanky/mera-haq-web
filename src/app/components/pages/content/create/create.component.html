@@ -87,9 +87,15 @@
                 <div class="tab-content pt-3" id="borderedTabContent">
                     <div class="tab-pane fade show active" id="bordered-desc" role="tabpanel" aria-labelledby="desc-tab">
                         <div class="row">
-                            <div class="col-lg-12 col-12">
-                                <div class="">
-                                    <angular-editor id="editor2" [config]="editorConfig" formControlName="DESCRIPTION"></angular-editor>
+                          <div class="col-lg-6 col-12">
+                            <div class="">
+                                <angular-editor id="editor2" [config]="editorConfig" formControlName="DESCRIPTION"></angular-editor>
+                            </div>
+                          </div>
+                            <div class="col-lg-6 col-12">
+                                <div class="NgxEditor__Wrapper">
+                                  <ngx-editor-menu [editor]="editor" [toolbar]="toolbar" [colorPresets]="colorPresets"> </ngx-editor-menu>
+                                  <ngx-editor [editor]="editor" formControlName="DESCRIPTION" [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
                                 </div>
                             </div>
                         </div>

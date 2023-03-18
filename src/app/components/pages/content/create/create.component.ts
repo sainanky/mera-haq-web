@@ -7,6 +7,7 @@ import { CommonService } from 'src/app/services/common.service';
 import { ConfigService } from 'src/app/services/config/config.service';
 import { ContentService } from 'src/app/services/content/content.service';
 import { environment } from 'src/environments/environment';
+import { Editor, Toolbar } from 'ngx-editor';
 
 @Component({
   selector: 'app-create',
@@ -52,17 +53,14 @@ export class CreateComponent {
         tag: 'h1',
       },
     ],
-    uploadUrl: environment.url+'/upload/file',
+    // uploadUrl: environment.url+'/upload/file',
     // upload: (file: File) : Observable<HttpEvent<UploadResponse>> => { 
     //   console.log("file =", file)
     // },
     uploadWithCredentials: false,
     sanitize: true,
     toolbarPosition: 'top',
-    toolbarHiddenButtons: [
-      ['bold', 'italic'],
-      ['fontSize']
-    ]
+    toolbarHiddenButtons: []
   };
 
   constructor(private _content : ContentService, private _category : CategoryService,
@@ -81,11 +79,26 @@ export class CreateComponent {
   stateArr : any = [];
   examsArr : any = [];
   selectedCategory : any = {};
+  editor: Editor;
+  toolbar: Toolbar = [
+    // default value
+    ['bold', 'italic'],
+    ['underline', 'strike'],
+    ['code', 'blockquote'],
+    ['ordered_list', 'bullet_list'],
+    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
+    ['link', 'image'],
+    ['text_color', 'background_color'],
+    ['align_left', 'align_center', 'align_right', 'align_justify'],
+    ['horizontal_rule', 'format_clear'],
+  ];
+  colorPresets = ['red', '#FF0000', 'rgb(255, 0, 0)'];
 
   ngOnInit(){
     this.getCategory();
     this.getStates();
     this.getExams();
+    this.editor = new Editor();
     this.createForm = this.fb.group({
       CATEGORY : new FormControl('', Validators.required),
       NAME : new FormControl('', Validators.required),
@@ -357,5 +370,9 @@ export class CreateComponent {
     this._config.getExams().subscribe(res=>{
       this.examsArr = res['data'];
     })
+  }
+
+  ngOnDestroy(): void {
+    this.editor.destroy();
   }
 }

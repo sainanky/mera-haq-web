@@ -1,10 +1,10 @@
 <section class="section">
     <div class="row">
       <div class="col-lg-6 col-12 text-left mb-3">
-        <h4 class="mb-0">Category List</h4>
+        <h4 class="mb-0">Exams List</h4>
       </div>
       <div class="col-lg-6 col-12 text-right mb-3">
-        <button class="btn btn-primary" routerLink="/app/category/create">Create</button>
+        <button class="btn btn-primary" routerLink="/app/exams/create">Create</button>
       </div>
       <div class="col-lg-12">
         <ngx-datatable
@@ -16,17 +16,8 @@
             headerHeight="auto"
             [footerHeight]="50"
             rowHeight="auto"
-            [limit]="10"
-            [scrollbarH]="true">
+            [limit]="10">
 
-            <ngx-datatable-column prop="ICON_URL" [sortable]="false" [width]="30">
-              <ng-template ngx-datatable-header-template>ICON</ng-template>
-              <ng-template class="d-flext" let-row="row" ngx-datatable-cell-template>
-                  <div class="img-container">
-                    <img [src]="row?.ICON_URL" [style.background]="row?.COLOR" height="40">
-                  </div>
-              </ng-template>
-          </ngx-datatable-column>
 
             <ngx-datatable-column prop="NAME" [sortable]="true" [width]="100">
                 <ng-template ngx-datatable-header-template>Name</ng-template>
@@ -35,17 +26,20 @@
                 </ng-template>
             </ngx-datatable-column>
 
-            <ngx-datatable-column prop="DESCRIPTION" [sortable]="true" [width]="100">
-                <ng-template ngx-datatable-header-template>Description</ng-template>
+            <ngx-datatable-column prop="image" [sortable]="false" [width]="30">
+                <ng-template ngx-datatable-header-template>Image</ng-template>
                 <ng-template class="d-flext" let-row="row" ngx-datatable-cell-template>
-                    {{row.DESCRIPTION ? row.DESCRIPTION : '-'}}
+                    <div *ngIf="row?.image" class="img-container">
+                      <img [src]="row?.image" [style.background]="row?.COLOR" height="40">
+                    </div>
+                    <ng-container *ngIf="!row?.image">NA</ng-container>
                 </ng-template>
             </ngx-datatable-column>
 
             <ngx-datatable-column prop="DESCRIPTION" [sortable]="false" [width]="30">
               <ng-template ngx-datatable-header-template>Action</ng-template>
               <ng-template class="d-flext" let-row="row" ngx-datatable-cell-template>
-                  <i class="zmdi zmdi-edit" routerLink="/app/category/create" [queryParams]="{'C_ID' : row?.C_ID }"></i>
+                  <i class="zmdi zmdi-edit" (click)="routeToCreate(row)"></i>
               </ng-template>
           </ngx-datatable-column>
 

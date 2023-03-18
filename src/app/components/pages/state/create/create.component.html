@@ -1,0 +1,55 @@
+<section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+                <div class="col-lg-6 col-12">
+                    <h5 class="card-title">Create State</h5>
+                </div>
+                <div class="col-lg-6 col-12 text-right mt-2">
+                    <button type="submit" class="btn btn-outline-primary" routerLink="/app/states/list">Back</button>
+                </div>
+            </div>
+
+            <!-- General Form Elements -->
+            <div class="row mb-3">
+                <div class="col-lg-6 col-12">
+                    <label for="inputText" class="col-form-label">Name</label>
+                    <div class="">
+                        <input type="text" [(ngModel)]="state_val" placeholder="enter state name here..." class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-12">
+                    <label for="inputText" class="col-form-label">Image Url</label>
+                    <div class="">
+                        <input type="text" [(ngModel)]="image_val" placeholder="enter image url here..." class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-12 mt-3">
+                    <label for="inputNumber" class="col-form-label">Image Upload</label>
+                    <div class="">
+                        <input class="form-control" (change)="onFilePicked($event)" type="file" id="formFileBanner" accept="image/png, image/gif, image/jpeg">
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-12 mt-3 flex-align-center">
+                    <img *ngIf="image_val" [src]="image_val" width="80" height="60">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <button *ngIf="!selectedData?.state" type="button" class="btn btn-primary" (click)="submit()">Submit</button>
+                    <button *ngIf="selectedData?.state" type="button" class="btn btn-primary" (click)="update()">Update</button>
+                    <button type="button" class="btn btn-outline-primary ms-2">Reset</button>
+                </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+</section>

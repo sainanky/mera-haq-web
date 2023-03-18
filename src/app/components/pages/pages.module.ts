@@ -8,6 +8,8 @@ import { CategoryModule } from './category/category.module';
 import { ContentModule } from './content/content.module';
 import { UsersModule } from './users/users.module';
 import { ConfigModule } from './config/config.module';
+import { StateModule } from './state/state.module';
+import { ExamTypesModule } from './exam-types/exam-types.module';
 
 const routes : Routes = [
   {
@@ -24,7 +26,8 @@ const routes : Routes = [
       { path : "content", loadChildren : () => ContentModule },
       { path : "users", loadChildren : () => UsersModule },
       { path : "config", loadChildren : () => ConfigModule },
-      { path : "config", loadChildren : () => ConfigModule },
+      { path : "states", loadChildren : () => StateModule },
+      { path : "exams", loadChildren : () => ExamTypesModule },
     ]
   }
 ];

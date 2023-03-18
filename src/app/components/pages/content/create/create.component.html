@@ -42,7 +42,7 @@
                   <div class="">
                       <select class="form-control" formControlName="STATE">
                           <option value="">Select State *</option>
-                          <option *ngFor="let item of stateArr" [value]="item">{{item}}</option>
+                          <option *ngFor="let item of stateArr" [value]="item?.state">{{item?.state}}</option>
                       </select>
                   </div>
                 </div>

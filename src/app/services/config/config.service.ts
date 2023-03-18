@@ -20,7 +20,23 @@ export class ConfigService {
     return this._http.get(`/config/exams`);
   }
 
+  saveExams(body){
+    return this._http.post(`/config/exams`, body);
+  }
+
+  updateExams(DATA_NAME, body){
+    return this._http.put(`/config/exams/${DATA_NAME}`, body);
+  }
+
   update(values){
     return this._http.put(`/config`, values);
+  }
+
+  saveState(body){
+    return this._http.post(`/config/state`, body);
+  }
+
+  updateState(DATA_NAME, body){
+    return this._http.put(`/config/state/${DATA_NAME}`, body);
   }
 }

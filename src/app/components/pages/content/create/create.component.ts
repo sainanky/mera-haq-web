@@ -62,6 +62,8 @@ export class CreateComponent {
     toolbarPosition: 'top',
     toolbarHiddenButtons: []
   };
+  tabsArr : any = [];
+  selectedTab : string = '';
 
   constructor(private _content : ContentService, private _category : CategoryService,
     private fb : FormBuilder, private _common : CommonService, private _router : Router,
@@ -108,6 +110,8 @@ export class CreateComponent {
       ATTACHMENTS : this.fb.array([]),
       YOUTUBE_LINKS : this.fb.array([]),
       STATE : '',
+      PROCESS : '',
+      DOCUMENTS : '',
     });
 
     this._route.queryParams.subscribe(res=>{
@@ -230,7 +234,7 @@ export class CreateComponent {
     if(!this.createForm.valid){
       this._common.showToastr("error", "Please fill form correctly...");
     }
-    let { CATEGORY, NAME, DESCRIPTION, IS_FEATURED, BANNER_IMG, ATTACHMENTS, YOUTUBE_LINKS, STATE } = this.createForm.value;
+    let { CATEGORY, NAME, DESCRIPTION, IS_FEATURED, BANNER_IMG, ATTACHMENTS, YOUTUBE_LINKS, STATE, PROCESS, DOCUMENTS } = this.createForm.value;
     let attachmentArr = [], youtubeLinksArr = [];
     if(ATTACHMENTS.length > 0){
       for(let i = 0; i < ATTACHMENTS.length; i++){
@@ -252,7 +256,9 @@ export class CreateComponent {
       BANNER_IMG : BANNER_IMG,
       ATTACHMENTS : attachmentArr, 
       YOUTUBE_LINKS : youtubeLinksArr,
-      STATE
+      STATE,
+      PROCESS,
+      DOCUMENTS
     };
     this._common.toggleProgressLoader(true);
     this.isApiLoading = true;
@@ -276,7 +282,7 @@ export class CreateComponent {
     // if(!this.createForm.valid){
     //   this._common.showToastr("error", "Please fill form correctly...");
     // }
-    let { CATEGORY, NAME, DESCRIPTION, IS_FEATURED, BANNER_IMG, ATTACHMENTS, YOUTUBE_LINKS, STATE } = this.createForm.value;
+    let { CATEGORY, NAME, DESCRIPTION, IS_FEATURED, BANNER_IMG, ATTACHMENTS, YOUTUBE_LINKS, STATE, PROCESS, DOCUMENTS } = this.createForm.value;
     let attachmentArr = [], youtubeLinksArr = [];
     if(ATTACHMENTS.length > 0){
       for(let i = 0; i < ATTACHMENTS.length; i++){
@@ -298,7 +304,9 @@ export class CreateComponent {
       BANNER_IMG : BANNER_IMG,
       ATTACHMENTS : attachmentArr, 
       YOUTUBE_LINKS : youtubeLinksArr,
-      STATE
+      STATE,
+      PROCESS,
+      DOCUMENTS
     };
     this._common.toggleProgressLoader(true);
     this.isApiLoading = true;
@@ -330,6 +338,8 @@ export class CreateComponent {
         this.createForm.controls.BANNER_IMG.setValue(data.BANNER_IMG);
         this.createForm.controls.DESCRIPTION.setValue(data.DESCRIPTION);
         this.createForm.controls.STATE.setValue(data.STATE);
+        this.createForm.controls.PROCESS.setValue(data.PROCESS);
+        this.createForm.controls.DOCUMENTS.setValue(data.DOCUMENTS);
         if(data.ATTACHMENTS.length > 0){
           for(let i = 0; i < data.ATTACHMENTS.length; i++){
             let v = data.ATTACHMENTS[i];
@@ -347,6 +357,11 @@ export class CreateComponent {
 
         let categoryFilter = this.categoryArr.filter(v => v.C_ID == data.C_ID);
         if(categoryFilter.length > 0) this.selectedCategory = categoryFilter[0];
+        if(this.selectedCategory.TABS){
+          let tabs = this.selectedCategory.TABS.split(',');
+          this.tabsArr = tabs;
+          if(this.tabsArr.length > 0) this.selectedTab = this.tabsArr[0];
+        }
         console.log("selected category =", this.selectedCategory)
       }
     },err=>{
@@ -357,7 +372,13 @@ export class CreateComponent {
   onCategoryChange(val){
     let categoryFilter = this.categoryArr.filter(v => v.C_ID == val);
     if(categoryFilter.length > 0) this.selectedCategory = categoryFilter[0];
-    console.log("selected category =", this.selectedCategory)
+    this.tabsArr = [];
+    if(this.selectedCategory.TABS){
+      let tabs = this.selectedCategory.TABS.split(',');
+      this.tabsArr = tabs;
+      if(this.tabsArr.length > 0) this.selectedTab = this.tabsArr[0];
+    }
+    console.log("selected category =", this.tabsArr)
   }
 
   getStates(){

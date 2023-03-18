@@ -24,6 +24,7 @@ const routes : Routes = [
       { path : "content", loadChildren : () => ContentModule },
       { path : "users", loadChildren : () => UsersModule },
       { path : "config", loadChildren : () => ConfigModule },
+      { path : "config", loadChildren : () => ConfigModule },
     ]
   }
 ];

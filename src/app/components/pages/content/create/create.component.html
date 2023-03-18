@@ -64,43 +64,55 @@
                     <input class="form-check-input" name="IS_FEATURED" formControlName="IS_FEATURED" type="checkbox" id="flexSwitchCheckDefault">
                   </div>
                 </div>
-                <div class="col-lg-6 col-12">
-                    <label for="inputText" class="col-form-label">Banner Image</label>
-                    <div class="">
-                      <input class="form-control" (change)="onFilePicked($event, 'banner')" type="file" id="formFileBanner" accept="image/png, image/gif, image/jpeg">
-                    </div>
+                <div class="col-lg-4 col-8">
+                  <label for="inputText" class="col-form-label">Banner Image</label>
+                  <div class="">
+                    <input class="form-control" (change)="onFilePicked($event, 'banner')" type="file" id="formFileBanner" accept="image/png, image/gif, image/jpeg">
+                  </div>
+                </div>
+                <div class="col-lg-2 col-4 flex-end-row">
+                  <img *ngIf="createForm?.value?.BANNER_IMG" [src]="createForm?.value?.BANNER_IMG" width="70" height="50">
+                  <img *ngIf="!createForm?.value?.BANNER_IMG" src="../../../../../assets/logo/logo.jpg" width="70" height="50">
                 </div>
               </div>
 
-              <div class="row mb-3">
+              <div *ngIf="tabsArr?.length > 0" class="row mb-3">
                 <ul class="nav nav-tabs nav-tabs-bordered" id="borderedTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                      <button class="nav-link active" id="desc-tab" data-bs-toggle="tab" data-bs-target="#bordered-desc" type="button" role="tab" aria-controls="home" aria-selected="true">Description</button>
+                  <ng-container *ngFor="let tab of tabsArr">
+                    <li class="nav-item" role="presentation" (click)="selectedTab = tab">
+                      <button class="nav-link text-capitalize" [ngClass]="{'active' : selectedTab == tab}" id="desc-tab" data-bs-toggle="tab" data-bs-target="#bordered-desc" type="button" role="tab" aria-controls="home" aria-selected="true">{{tab}}</button>
                     </li>
-                    <li class="nav-item" role="presentation">
-                      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Attachments</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                      <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#bordered-contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Youtube Links</button>
-                    </li>
+                  </ng-container>
                 </ul>
                 <div class="tab-content pt-3" id="borderedTabContent">
-                    <div class="tab-pane fade show active" id="bordered-desc" role="tabpanel" aria-labelledby="desc-tab">
-                        <div class="row">
-                          <div class="col-lg-6 col-12">
-                            <div class="">
-                                <angular-editor id="editor2" [config]="editorConfig" formControlName="DESCRIPTION"></angular-editor>
-                            </div>
+                    <div *ngIf="selectedTab == 'description'" class="tab-pane fade" [ngClass]="{'show active' : selectedTab == 'description'}" id="bordered-desc" role="tabpanel" aria-labelledby="desc-tab">
+                      <div class="row">
+                        <div class="col-lg-12 col-12">
+                          <div class="">
+                              <angular-editor id="editor2" [config]="editorConfig" formControlName="DESCRIPTION"></angular-editor>
                           </div>
-                            <div class="col-lg-6 col-12">
-                                <div class="NgxEditor__Wrapper">
-                                  <ngx-editor-menu [editor]="editor" [toolbar]="toolbar" [colorPresets]="colorPresets"> </ngx-editor-menu>
-                                  <ngx-editor [editor]="editor" formControlName="DESCRIPTION" [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
-                                </div>
-                            </div>
                         </div>
+                      </div>
                     </div>
-                    <div class="tab-pane fade" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <div *ngIf="selectedTab == 'process'" class="tab-pane fade"  [ngClass]="{'show active' : selectedTab == 'process'}"id="bordered-desc" role="tabpanel" aria-labelledby="desc-tab">
+                      <div class="row">
+                        <div class="col-lg-12 col-12">
+                          <div class="">
+                              <angular-editor id="editor2" [config]="editorConfig" formControlName="PROCESS"></angular-editor>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngIf="selectedTab == 'document'" class="tab-pane fade" [ngClass]="{'show active' : selectedTab == 'document'}" id="bordered-desc" role="tabpanel" aria-labelledby="desc-tab">
+                      <div class="row">
+                        <div class="col-lg-12 col-12">
+                          <div class="">
+                              <angular-editor id="editor2" [config]="editorConfig" formControlName="DOCUMENTS"></angular-editor>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngIf="selectedTab == 'attachment'" class="tab-pane fade" [ngClass]="{'show active' : selectedTab == 'attachment'}" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="row mt-3">
                           <table class="table">
                             <thead>
@@ -151,7 +163,7 @@
                           </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="bordered-contact" role="tabpanel" aria-labelledby="contact-tab">
+                    <div *ngIf="selectedTab == 'youtube'" class="tab-pane fade" [ngClass]="{'show active' : selectedTab == 'youtube'}" id="bordered-contact" role="tabpanel" aria-labelledby="contact-tab">
                       <div class="row mt-3">
                         <table class="table">
                           <thead>

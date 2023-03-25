@@ -39,4 +39,12 @@ export class ConfigService {
   updateState(DATA_NAME, body){
     return this._http.put(`/config/state/${DATA_NAME}`, body);
   }
+
+  getDashboardCounts(type){
+    return this._http.get(`/config/dashboard-counts?type=${type}`);
+  }
+
+  getOrders(body){
+    return this._http.post(`/order/list`, body);
+  }
 }

@@ -52,8 +52,8 @@
                 </div>
                 <div class="col-lg-4 col-12 form-flex-row">
                     <label class="col-form-label">Paid : </label>
-                    <button *ngIf="userInfo?.IS_PAID == '1'" class="badge btn btn-success height-fit-content">Active</button>
-                    <button *ngIf="userInfo?.IS_PAID == '0'" class="badge btn btn-danger height-fit-content">Inactive</button>
+                    <button *ngIf="userInfo?.IS_PAID == '1'" class="badge btn btn-success height-fit-content">Paid</button>
+                    <button *ngIf="userInfo?.IS_PAID == '0'" class="badge btn btn-danger height-fit-content">Unpaid</button>
                 </div>
                 <div class="col-lg-4 col-12 form-flex-row">
                     <label class="col-form-label">Status : </label>
@@ -62,11 +62,37 @@
                 </div>
                 <div class="col-lg-4 col-12 form-flex-row">
                     <label class="col-form-label">Ref. By. : </label>
-                    <label class="col-form-label">{{userInfo?.REF_USER_NAME}}</label>
+                    <label class="col-form-label">
+                        {{userInfo?.REF_USER_NAME}} 
+                        <ng-container *ngIf="userInfo?.REF_USER_MOBILE">({{userInfo?.REF_USER_MOBILE}})</ng-container>
+                    </label>
                 </div>
                 <div class="col-lg-4 col-12 form-flex-row">
                     <label class="col-form-label">Address : </label>
                     <label class="col-form-label">{{userInfo?.ADDRESS}}</label>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-12">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Referral Code</th>
+                                <th>Total Referred</th>
+                                <th>Total Amount</th>
+                                <th>Paid Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{refInfo?.REF_CODE}}</td>
+                                <td>{{refInfo?.TOTAL_REF_USERS}}</td>
+                                <td>{{refInfo?.WALLET_INFO?.TOTAL_WALLET_AMOUNT | currency : 'INR'}}</td>
+                                <td>{{refInfo?.WALLET_INFO?.PAID_WALLET_AMOUNT | currency : 'INR'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 

@@ -13,6 +13,7 @@ export class ViewComponent {
   
   U_ID : string = '';
   userInfo : any = {};
+  refInfo : any = {};
 
   ngOnInit(){
     this._route.queryParams.subscribe(res=>{
@@ -38,6 +39,9 @@ export class ViewComponent {
   getRefInfo(){
     this._users.getRefInfo(this.U_ID).subscribe(res=>{
       console.log(res);
+      if(res['data']){
+        this.refInfo = res['data'];
+      }
     })
   }
 }

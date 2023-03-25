@@ -58,8 +58,8 @@
             <ngx-datatable-column prop="IS_PAID" [sortable]="false" [width]="30">
               <ng-template ngx-datatable-header-template>Paid</ng-template>
               <ng-template class="d-flext" let-row="row" ngx-datatable-cell-template>
-                <button *ngIf="row?.IS_PAID == '1'" class="badge btn btn-success">Active</button>
-                <button *ngIf="row?.IS_PAID == '0'" class="badge btn btn-danger">Inactive</button>
+                <button *ngIf="row?.IS_PAID == '1'" class="badge btn btn-success">Paid</button>
+                <button *ngIf="row?.IS_PAID == '0'" class="badge btn btn-danger">Unpaid</button>
               </ng-template>
           </ngx-datatable-column>
             <ngx-datatable-column [sortable]="false" [width]="20">

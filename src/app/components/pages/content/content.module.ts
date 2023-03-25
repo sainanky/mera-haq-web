@@ -16,6 +16,7 @@ import { SafePipe } from 'src/app/pipes/safe/safe.pipe';
 import { SharedModule } from 'src/app/shared.module';
 import { ConfigService } from 'src/app/services/config/config.service';
 import { NgxEditorModule } from 'ngx-editor';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const routes : Routes = [
   { path : "", redirectTo : "list", pathMatch : "full" },
@@ -42,7 +43,8 @@ const routes : Routes = [
     NgxDatatableModule,
     AngularEditorModule,
     SharedModule,
-    NgxEditorModule
+    NgxEditorModule,
+    NgbModule
   ],
   providers : [ HttpService, CommonService, ContentService, ConfigService, CategoryService ]
 })

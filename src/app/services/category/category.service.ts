@@ -23,4 +23,5 @@ export class CategoryService {
   update(body, C_ID){
     return this._http.put('/category/'+C_ID, body);
   }
+
 }

@@ -28,4 +28,8 @@ export class ContentService {
     return this._http.get(`/content/${CN_ID}`);
   }
 
+  delete(CN_ID){
+    return this._http.delete(`/content/${CN_ID}`, {});
+  }
+
 }

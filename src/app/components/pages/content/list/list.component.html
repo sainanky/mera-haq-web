@@ -65,7 +65,7 @@
               <ng-template ngx-datatable-header-template>Action</ng-template>
               <ng-template class="d-flext" let-row="row" ngx-datatable-cell-template>
                   <i class="zmdi zmdi-edit" routerLink="/app/content/create" [queryParams]="{'CN_ID' : row?.CN_ID }"></i>
-                  <i class="zmdi zmdi-delete ms-2"></i>
+                  <i class="zmdi zmdi-delete ms-2" (click)="openModal(deleteModal, 'lg', row)"></i>
               </ng-template>
           </ngx-datatable-column>
 
@@ -73,3 +73,20 @@
       </div>
     </div>
 </section>
+
+
+ <!-- delete modal Dialog --> 
+<ng-template #deleteModal let-modal>
+    <div class="modal-header">
+        <h6 class="title" id="deleteModal">Delete</h6>
+    </div>
+    <div class="modal-body">
+        <div class="col-12">
+          Are you sure you want to delete <b>{{selectedData?.NAME}}</b> ?
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="deleteList()">Delete</button>
+        <button type="button" class="btn btn-dark" (click)="modal.dismiss('Close click')">Close</button>
+    </div>
+</ng-template>

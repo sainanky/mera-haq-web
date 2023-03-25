@@ -362,6 +362,10 @@ export class CreateComponent {
           this.tabsArr = tabs;
           if(this.tabsArr.length > 0) this.selectedTab = this.tabsArr[0];
         }
+        else{
+          this.tabsArr = ["description"];
+          if(this.tabsArr.length > 0) this.selectedTab = this.tabsArr[0];
+        }
         console.log("selected category =", this.selectedCategory)
       }
     },err=>{
@@ -376,6 +380,10 @@ export class CreateComponent {
     if(this.selectedCategory.TABS){
       let tabs = this.selectedCategory.TABS.split(',');
       this.tabsArr = tabs;
+      if(this.tabsArr.length > 0) this.selectedTab = this.tabsArr[0];
+    }
+    else{
+      this.tabsArr = ["description"];
       if(this.tabsArr.length > 0) this.selectedTab = this.tabsArr[0];
     }
     console.log("selected category =", this.tabsArr)

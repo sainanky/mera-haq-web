@@ -20,8 +20,8 @@ export class ContentService {
     return this._http.put(`/content/${CN_ID}`, body);
   }
 
-  get(){
-    return this._http.get(`/content`);
+  get(C_ID){
+    return this._http.get(`/content?C_ID=${C_ID}`);
   }
 
   getByID(CN_ID){

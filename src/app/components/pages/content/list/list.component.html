@@ -1,9 +1,16 @@
 <section class="section">
     <div class="row">
-        <div class="col-lg-6 col-12 text-left mb-3">
+        <div class="col-lg-4 col-12 text-left mb-3">
             <h4 class="mb-0">Content List</h4>
         </div>
-      <div class="col-lg-6 col-12 text-right mb-3">
+        <div class="col-lg-4 col-12 text-left mb-3 d-flex">
+            <label class="control-label w-50">Select Category</label>
+            <select class="form-control" (change)="getList($event.target.value)">
+                <option value="">All</option>
+                <option *ngFor="let item of categoryArr" [value]="item.C_ID">{{item.NAME}}</option>
+            </select>
+        </div>
+      <div class="col-lg-4 col-12 text-right mb-3">
         <button class="btn btn-primary" routerLink="/app/content/create">Create</button>
       </div>
       <div class="col-lg-12">
@@ -33,7 +40,7 @@
                 </ng-template>
             </ngx-datatable-column>
 
-            <ngx-datatable-column prop="BANNER_IMG" [sortable]="true" [width]="100">
+            <ngx-datatable-column prop="BANNER_IMG" [sortable]="true" [width]="70">
                 <ng-template ngx-datatable-header-template>Banner Image</ng-template>
                 <ng-template class="d-flext" let-row="row" ngx-datatable-cell-template>
                     <img *ngIf="row?.BANNER_IMG" [src]="row?.BANNER_IMG" width="60">
@@ -58,6 +65,7 @@
               <ng-template ngx-datatable-header-template>Action</ng-template>
               <ng-template class="d-flext" let-row="row" ngx-datatable-cell-template>
                   <i class="zmdi zmdi-edit" routerLink="/app/content/create" [queryParams]="{'CN_ID' : row?.CN_ID }"></i>
+                  <i class="zmdi zmdi-delete ms-2"></i>
               </ng-template>
           </ngx-datatable-column>
 

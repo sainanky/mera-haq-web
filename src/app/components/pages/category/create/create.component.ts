@@ -62,9 +62,11 @@ export class CreateComponent {
     if (!this.fileObj) {
       return false;
     }
+    this._common.toggleProgressLoader(true);
     const fileForm = new FormData();
     fileForm.append('file', this.fileObj);
     this._content.fileUpload(fileForm).subscribe(res => {
+      this._common.toggleProgressLoader(false);
       this.createForm.controls.ICON_URL.setValue(res['imageUrl']);
     });
   }
@@ -73,13 +75,15 @@ export class CreateComponent {
     if(!this.createForm.valid){
       this._common.showToastr("error", "Please fill form correctly...");
       return false;
-    }
+    }this._common.toggleProgressLoader(true);
     this._category.save(this.createForm.value).subscribe(res=>{
+      this._common.toggleProgressLoader(false);
       this._common.showToastr("success", "Saved Successfully...");
       setTimeout(() => {
         this._router.navigateByUrl('/app/category/list');
       }, 1500);
     },err=>{
+      this._common.toggleProgressLoader(false);
       this._common.showToastr("error", err.error.message);
     })
   }
@@ -88,13 +92,15 @@ export class CreateComponent {
     if(!this.createForm.valid){
       this._common.showToastr("error", "Please fill form correctly...");
       return false;
-    }
+    }this._common.toggleProgressLoader(true);
     this._category.update(this.createForm.value, this.C_ID).subscribe(res=>{
       this._common.showToastr("success", "Updated Successfully...");
+      this._common.toggleProgressLoader(false);
       setTimeout(() => {
         this._router.navigateByUrl('/app/category/list');
       }, 1500);
     },err=>{
+      this._common.toggleProgressLoader(false);
       this._common.showToastr("error", err.error.message);
     })
   }

@@ -9,7 +9,7 @@ export class CategoryService {
   constructor(private _http : HttpService) { }
 
   get(){
-    return this._http.get(`/category`);
+    return this._http.get(`/category/all`);
   }
 
   getByID(C_ID){

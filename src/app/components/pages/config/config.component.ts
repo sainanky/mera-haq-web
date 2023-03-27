@@ -25,7 +25,9 @@ export class ConfigComponent {
       REGISTRATION_GST_PERCENTAGE : new FormControl(''),
       REF_BY_AMOUNT : new FormControl(''),
       REF_TO_AMOUNT : new FormControl(''),
-      HOME_PAGE_NOTIFICATION_MSG : new FormControl('')
+      HOME_PAGE_NOTIFICATION_MSG : new FormControl(''),
+      HOME_IMAGE_1 : new FormControl(''),
+      HOME_IMAGE_2 : new FormControl('')
     });
     this.getData();
   }
@@ -50,6 +52,8 @@ export class ConfigComponent {
       if(type == 'login') this.loginSliderImgArr.push(res['imageUrl']);
       else if(type == 'gift') this.giftSliderImgArr.push(res['imageUrl']);
       else if(type == 'home') this.homeSliderImgArr.push(res['imageUrl']);
+      else if(type == 'home_1') this.configForm.controls.HOME_IMAGE_1.setValue(res['imageUrl']);
+      else if(type == 'home_2') this.configForm.controls.HOME_IMAGE_2.setValue(res['imageUrl']);
     },err=>{
       this._common.toggleProgressLoader(false);
       this._common.showToastr("error", "some error ocurred");
@@ -73,6 +77,8 @@ export class ConfigComponent {
         this.configForm.controls.REF_BY_AMOUNT.setValue(data['REF_BY_AMOUNT']);
         this.configForm.controls.REF_TO_AMOUNT.setValue(data['REF_TO_AMOUNT']);
         this.configForm.controls.HOME_PAGE_NOTIFICATION_MSG.setValue(data['HOME_PAGE_NOTIFICATION_MSG']);
+        this.configForm.controls.HOME_IMAGE_1.setValue(data['HOME_IMAGE_1']);
+        this.configForm.controls.HOME_IMAGE_2.setValue(data['HOME_IMAGE_2']);
         if(data['AUTH_PAGE_SLIDER']) this.loginSliderImgArr = data['AUTH_PAGE_SLIDER'];
         if(data['GIFT_PAGE_SLIDER']) this.giftSliderImgArr = data['GIFT_PAGE_SLIDER'];
         if(data['HOME_PAGE_SLIDER']) this.homeSliderImgArr = data['HOME_PAGE_SLIDER'];

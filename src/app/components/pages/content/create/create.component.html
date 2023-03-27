@@ -205,8 +205,11 @@
               </div>
               <div class="row mb-3">
                 <div class="col-sm-12 text-center">
-                  <button *ngIf="!CN_ID" type="button" class="btn btn-primary" (click)="submit()">Submit</button>
-                  <button *ngIf="CN_ID" type="button" class="btn btn-primary" (click)="update()">Update</button>
+                  <button *ngIf="!CN_ID && !isApiLoading" type="button" class="btn btn-primary" (click)="submit()">Submit</button>
+                  <button *ngIf="CN_ID && !isApiLoading" type="button" class="btn btn-primary" (click)="update()">Update</button>
+                  <button *ngIf="isApiLoading" type="button" class="btn btn-primary">
+                    <i class="zmdi zmdi-spinner fa-spin"></i>
+                  </button>
                   <button type="button" class="btn btn-outline-primary ms-2">Reset</button>
                 </div>
               </div>

@@ -201,6 +201,21 @@
                         </div>
                       </div>
                     </div>
+
+                    <div *ngIf="selectedTab == 'pdf'" class="tab-pane fade" [ngClass]="{'show active' : selectedTab == 'pdf'}" id="bordered-contact" role="tabpanel" aria-labelledby="contact-tab">
+                      <div class="row">
+                        <div class="col-lg-4 col-8">
+                          <div class="">
+                            <input class="form-control" (change)="onFilePicked($event, 'pdf')" type="file" id="formFileBanner" accept="application/pdf">
+                          </div>
+                        </div>
+                        <div class="col-lg-4 col-4">
+                          <a *ngIf="createForm?.value?.PDF_URL" [href]="createForm?.value?.PDF_URL" target="_blank">
+                            <i class="bi bi-file-earmark-arrow-down fa-2xl"></i>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
                 </div>
               </div>
               <div class="row mb-3">

@@ -112,6 +112,7 @@ export class CreateComponent {
       STATE : '',
       PROCESS : '',
       DOCUMENTS : '',
+      PDF_URL : ''
     });
 
     this._route.queryParams.subscribe(res=>{
@@ -176,6 +177,7 @@ export class CreateComponent {
       this._common.toggleProgressLoader(false);
       this._common.showToastr("success", "uploading finished");
       if(idx == 'banner') this.createForm.controls.BANNER_IMG.setValue(res['imageUrl']);
+      if(idx == 'pdf') this.createForm.controls.PDF_URL.setValue(res['imageUrl']);
       else this.ATTACHMENTS.controls[idx]['controls']['URL'].setValue(res['imageUrl']);
     },err=>{
       this._common.toggleProgressLoader(false);
@@ -234,7 +236,7 @@ export class CreateComponent {
     if(!this.createForm.valid){
       this._common.showToastr("error", "Please fill form correctly...");
     }
-    let { CATEGORY, NAME, DESCRIPTION, IS_FEATURED, BANNER_IMG, ATTACHMENTS, YOUTUBE_LINKS, STATE, PROCESS, DOCUMENTS } = this.createForm.value;
+    let { CATEGORY, NAME, DESCRIPTION, IS_FEATURED, BANNER_IMG, ATTACHMENTS, YOUTUBE_LINKS, STATE, PROCESS, DOCUMENTS, PDF_URL } = this.createForm.value;
     let attachmentArr = [], youtubeLinksArr = [];
     if(ATTACHMENTS.length > 0){
       for(let i = 0; i < ATTACHMENTS.length; i++){
@@ -258,7 +260,8 @@ export class CreateComponent {
       YOUTUBE_LINKS : youtubeLinksArr,
       STATE,
       PROCESS,
-      DOCUMENTS
+      DOCUMENTS,
+      PDF_URL
     };
     this._common.toggleProgressLoader(true);
     this.isApiLoading = true;
@@ -282,7 +285,7 @@ export class CreateComponent {
     // if(!this.createForm.valid){
     //   this._common.showToastr("error", "Please fill form correctly...");
     // }
-    let { CATEGORY, NAME, DESCRIPTION, IS_FEATURED, BANNER_IMG, ATTACHMENTS, YOUTUBE_LINKS, STATE, PROCESS, DOCUMENTS } = this.createForm.value;
+    let { CATEGORY, NAME, DESCRIPTION, IS_FEATURED, BANNER_IMG, ATTACHMENTS, YOUTUBE_LINKS, STATE, PROCESS, DOCUMENTS, PDF_URL } = this.createForm.value;
     let attachmentArr = [], youtubeLinksArr = [];
     if(ATTACHMENTS.length > 0){
       for(let i = 0; i < ATTACHMENTS.length; i++){
@@ -306,7 +309,8 @@ export class CreateComponent {
       YOUTUBE_LINKS : youtubeLinksArr,
       STATE,
       PROCESS,
-      DOCUMENTS
+      DOCUMENTS,
+      PDF_URL
     };
     this._common.toggleProgressLoader(true);
     this.isApiLoading = true;
@@ -340,6 +344,7 @@ export class CreateComponent {
         this.createForm.controls.STATE.setValue(data.STATE);
         this.createForm.controls.PROCESS.setValue(data.PROCESS);
         this.createForm.controls.DOCUMENTS.setValue(data.DOCUMENTS);
+        this.createForm.controls.PDF_URL.setValue(data.PDF_URL);
         if(data.ATTACHMENTS.length > 0){
           for(let i = 0; i < data.ATTACHMENTS.length; i++){
             let v = data.ATTACHMENTS[i];

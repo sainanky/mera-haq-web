@@ -13,7 +13,7 @@ export class CategoryService {
   }
 
   getByID(C_ID){
-    return this._http.get(`/category/${C_ID}`);
+    return this._http.get(`/category/byid/${C_ID}`);
   }
 
   save(body){

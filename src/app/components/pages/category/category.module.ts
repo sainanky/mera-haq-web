@@ -10,6 +10,7 @@ import { CommonService } from 'src/app/services/common.service';
 import { CategoryService } from 'src/app/services/category/category.service';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { SharedModule } from 'src/app/shared.module';
+import { ConfigService } from 'src/app/services/config/config.service';
 
 const routes : Routes = [
   {
@@ -49,7 +50,8 @@ const routes : Routes = [
   providers : [
     HttpService,
     CommonService,
-    CategoryService
+    CategoryService,
+    ConfigService
   ]
 })
 export class CategoryModule { }

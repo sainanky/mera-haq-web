@@ -47,4 +47,9 @@ export class ConfigService {
   getOrders(body){
     return this._http.post(`/order/list`, body);
   }
+
+  translateLanguage(content){
+    let body = { content : content, language : 'hi' };
+    return this._http.post(`/translate/language`, body);
+  }
 }

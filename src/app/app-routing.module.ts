@@ -4,6 +4,8 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './components/auth/auth.module';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { PagesModule } from './components/pages/pages.module';
+import { PrivacyComponent } from './components/privacy/privacy.component';
+import { TermsComponent } from './components/terms/terms.component';
 import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
@@ -22,6 +24,14 @@ const routes: Routes = [
         path : "app",
         loadChildren : () => PagesModule,
         canActivate : [AuthGuard]
+      },
+      {
+        path : "privacy",
+        component : PrivacyComponent
+      },
+      {
+        path : "terms",
+        component : TermsComponent
       },
       {
         path : "**",

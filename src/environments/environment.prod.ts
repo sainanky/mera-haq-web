@@ -2,6 +2,7 @@ export const environment = {
   production: true,
   url : 'https://api.merahaq.techymojo.in',
   email : "merahaq007@gmail.com",
+  mobile : '+917849839524',
   firebase: {
     apiKey: "AIzaSyAWEmnezxRR0RCKK0DJH7ifhckKwx4hGxo",
     authDomain: "m-haq-403cc.firebaseapp.com",

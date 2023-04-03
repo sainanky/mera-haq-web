@@ -1,0 +1,12 @@
+.font-bold{
+    font-weight: bold;
+}
+.text-center{
+    text-align: center;
+}
+.card{
+    height: auto;
+    @media screen and (max-width: 480px) {
+        height: 100vh;
+    }
+}

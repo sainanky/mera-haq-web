@@ -179,8 +179,8 @@
                                     <td>{{item?.TOTAL_AMOUNT | currency : 'INR'}}</td>
                                     <td>{{item?.ORDER_DATE | date : 'dd-MM-yyyy'}}</td>
                                     <td>
-                                        <span *ngIf="item?.PAYMENT_STATUS == 'success'" class="badge bg-success">Paid</span>
-                                        <span *ngIf="item?.PAYMENT_STATUS == 'failed'" class="badge bg-error">Failed</span>
+                                        <span *ngIf="item?.PAYMENT_STATUS == 'paid'" class="badge bg-success">Paid</span>
+                                        <span *ngIf="item?.PAYMENT_STATUS == 'unpaid'" class="badge bg-danger">Failed</span>
                                         <span *ngIf="item?.PAYMENT_STATUS == 'pending'" class="badge bg-info">Pending</span>
                                     </td>
                                 </tr>

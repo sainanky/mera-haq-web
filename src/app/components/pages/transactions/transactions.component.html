@@ -1,0 +1,93 @@
+<section class="section">
+    <div class="row">
+      <div class="col-lg-6 col-12 text-left mb-3">
+        <h4 class="mb-0">Transactions List</h4>
+      </div>
+      <div class="col-lg-6 col-12">
+        <div class="datepicker-box float-end w-25">
+            <select class="form-control" [(ngModel)]="period_val" (change)="onDateChange($event.target.value)">
+                <option value="today">Today</option>
+                <option value="week">Last Week</option>
+                <option value="month">Last Month</option>
+                <option value="custom">Custom</option>
+            </select>
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <ngx-datatable
+            #table
+            class="material poke-table"
+            [rows]="dataArr"
+            [loadingIndicator]="isDataLoading"
+            [columnMode]="'force'"
+            headerHeight="auto"
+            [footerHeight]="50"
+            rowHeight="auto"
+            [limit]="10">
+
+            <ngx-datatable-column prop="NAME" [sortable]="true" [width]="100">
+                <ng-template ngx-datatable-header-template>Name</ng-template>
+                <ng-template class="d-flext" let-row="row" ngx-datatable-cell-template>
+                    {{row?.NAME}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column prop="MOBILE" [sortable]="true" [width]="100">
+                <ng-template ngx-datatable-header-template>Mobile</ng-template>
+                <ng-template class="d-flext" let-row="row" ngx-datatable-cell-template>
+                    {{row?.MOBILE}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column prop="TOTAL_AMOUNT" [sortable]="true" [width]="100">
+                <ng-template ngx-datatable-header-template>Amount</ng-template>
+                <ng-template class="d-flext" let-row="row" ngx-datatable-cell-template>
+                    {{row?.TOTAL_AMOUNT}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column prop="ORDER_DATE" [sortable]="true" [width]="100">
+                <ng-template ngx-datatable-header-template>Date</ng-template>
+                <ng-template class="d-flext" let-row="row" ngx-datatable-cell-template>
+                    {{row?.ORDER_DATE | date : 'dd-MM-yyyy'}}
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column prop="PAYMENT_STATUS" [sortable]="true" [width]="30">
+              <ng-template ngx-datatable-header-template>Status</ng-template>
+              <ng-template class="d-flext" let-row="row" ngx-datatable-cell-template>
+                <span *ngIf="row?.PAYMENT_STATUS == 'paid'" class="badge bg-success">Paid</span>
+                <span *ngIf="row?.PAYMENT_STATUS == 'unpaid'" class="badge bg-danger">Failed</span>
+                <span *ngIf="row?.PAYMENT_STATUS == 'pending'" class="badge bg-info">Pending</span>
+              </ng-template>
+          </ngx-datatable-column>
+
+        </ngx-datatable>
+      </div>
+    </div>
+</section>
+
+ <!-- delete modal Dialog --> 
+ <ng-template #periodModal let-modal>
+    <div class="modal-header">
+        <h6 class="title" id="deleteModal">Period</h6>
+    </div>
+    <div class="modal-body">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-12 col-lg-6">
+                    <label class="control-label">From Date</label>
+                    <input type="date" class="form-control" [(ngModel)]="fromDate">
+                </div>
+                <div class="col-12 col-lg-6">
+                    <label class="control-label">To Date</label>
+                    <input type="date" class="form-control" [(ngModel)]="toDate">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="onDateChange('filter')">Submit</button>
+        <button type="button" class="btn btn-dark" (click)="modal.dismiss('Close click')">Close</button>
+    </div>
+</ng-template>

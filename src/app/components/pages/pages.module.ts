@@ -10,6 +10,7 @@ import { UsersModule } from './users/users.module';
 import { ConfigModule } from './config/config.module';
 import { StateModule } from './state/state.module';
 import { ExamTypesModule } from './exam-types/exam-types.module';
+import { TransactionsModule } from './transactions/transactions.module';
 
 const routes : Routes = [
   {
@@ -28,6 +29,7 @@ const routes : Routes = [
       { path : "config", loadChildren : () => ConfigModule },
       { path : "states", loadChildren : () => StateModule },
       { path : "exams", loadChildren : () => ExamTypesModule },
+      { path : "transactions", loadChildren : () => TransactionsModule },
     ]
   }
 ];

@@ -1,10 +1,38 @@
 <section class="section">
     <div class="row">
-      <div class="col-lg-6 col-12 text-left mb-3">
-        <h4 class="mb-0">Users List</h4>
+      <div class="col-lg-3 col-12 text-left mb-3">
+        <h4 class="mb-0 mt-4">Users List</h4>
       </div>
-      <div class="col-lg-6 col-12 text-right mb-3">
-        <button class="btn btn-primary" routerLink="/app/users/create">Create</button>
+      <div class="col-lg-7 col-12 text-left mb-3">
+        <div class="row">
+          <div class="col-12 col-lg-3 ps-0">
+            <label class="control-label">Name</label>
+            <input type="text" class="form-control" [(ngModel)]="cust_name" (keyup.enter)="getList()" placeholder="customer name">
+          </div>
+          <div class="col-12 col-lg-3 ps-0">
+            <label class="control-label">Mobile</label>
+            <input type="text" class="form-control" [(ngModel)]="cust_mobile" (keyup.enter)="getList()" placeholder="customer mobile">
+          </div>
+          <div class="col-12 col-lg-2 ps-0">
+            <label class="control-label">Limit</label>
+            <select class="form-control" [(ngModel)]="limit">
+              <option value="">Select Limit</option>
+              <option value="10">10</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+              <option value="200">200</option>
+              <option value="500">500</option>
+              <option value="1000">1000</option>
+            </select>
+          </div>
+          <div class="col-12 col-lg-4 ps-0">
+            <button class="btn btn-dark mt-4" (click)="getList()">Submit</button>
+            <button class="btn btn-outline-dark mt-4 ms-2" (click)="clearFilter()">Clear</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-12 text-right mb-3">
+        <button class="btn btn-primary mt-4" routerLink="/app/users/create">Create</button>
       </div>
       <div class="col-12">
         <ngx-datatable
@@ -19,21 +47,21 @@
             [scrollbarH]="true"
             [reorderable]="true">
 
-            <ngx-datatable-column prop="NAME" [sortable]="true" [width]="20">
+            <ngx-datatable-column prop="NAME" [sortable]="true" [width]="10">
               <ng-template ngx-datatable-header-template>#</ng-template>
               <ng-template class="d-flext" let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
                   {{rowIndex+1}}.
               </ng-template>
           </ngx-datatable-column>
 
-            <ngx-datatable-column prop="NAME" [sortable]="true" [width]="100">
+            <ngx-datatable-column prop="NAME" [sortable]="true" [width]="80">
                 <ng-template ngx-datatable-header-template>Name</ng-template>
                 <ng-template class="d-flext" let-row="row" ngx-datatable-cell-template>
                     {{row?.NAME}}
                 </ng-template>
             </ngx-datatable-column>
 
-            <ngx-datatable-column prop="MOBILE" [sortable]="true" [width]="100">
+            <ngx-datatable-column prop="MOBILE" [sortable]="true" [width]="80">
                 <ng-template ngx-datatable-header-template>Mobile</ng-template>
                 <ng-template class="d-flext" let-row="row" ngx-datatable-cell-template>
                     {{row?.MOBILE}}
@@ -47,7 +75,7 @@
                 </ng-template>
             </ngx-datatable-column>
 
-            <ngx-datatable-column prop="IS_ACTIVE" [sortable]="false" [width]="50">
+            <ngx-datatable-column prop="IS_ACTIVE" [sortable]="true" [width]="50">
                 <ng-template ngx-datatable-header-template>Status</ng-template>
                 <ng-template class="d-flext" let-row="row" ngx-datatable-cell-template>
                     <button *ngIf="row?.IS_ACTIVE == '1'" class="badge btn btn-success">Active</button>
@@ -55,13 +83,25 @@
                 </ng-template>
             </ngx-datatable-column>
 
-            <ngx-datatable-column prop="IS_PAID" [sortable]="false" [width]="30">
+            <ngx-datatable-column prop="IS_PAID" [sortable]="true" [width]="30">
               <ng-template ngx-datatable-header-template>Paid</ng-template>
               <ng-template class="d-flext" let-row="row" ngx-datatable-cell-template>
                 <button *ngIf="row?.IS_PAID == '1'" class="badge btn btn-success">Paid</button>
                 <button *ngIf="row?.IS_PAID == '0'" class="badge btn btn-danger">Unpaid</button>
               </ng-template>
-          </ngx-datatable-column>
+            </ngx-datatable-column>
+            <ngx-datatable-column prop="TOTAL_REFERRED" [sortable]="true" [width]="30">
+              <ng-template ngx-datatable-header-template>Total Referred</ng-template>
+              <ng-template class="d-flext" let-row="row" ngx-datatable-cell-template>
+                {{row?.TOTAL_REFERRED}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column prop="IS_PAID" [sortable]="true" [width]="30">
+              <ng-template ngx-datatable-header-template>Registered On</ng-template>
+              <ng-template class="d-flext" let-row="row" ngx-datatable-cell-template>
+                {{row?.CREATED_DATE | date : 'dd-MM-YYYY'}}
+              </ng-template>
+            </ngx-datatable-column>
             <ngx-datatable-column [sortable]="false" [width]="20">
                 <ng-template ngx-datatable-header-template>Action</ng-template>
                 <ng-template class="d-flext" let-row="row" ngx-datatable-cell-template>

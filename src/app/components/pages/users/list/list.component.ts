@@ -12,6 +12,10 @@ export class ListComponent {
 
   dataArr : any = [];
   isDataLoading : boolean = false;
+  cust_name : string = '';
+  cust_mobile : string = '';
+  start : number = 0;
+  limit : number = 50;
 
   ngOnInit(){
     this.getList();
@@ -19,8 +23,13 @@ export class ListComponent {
 
   getList(){
     this.isDataLoading = true;
-    this._users.getList().subscribe(res=>{
-      console.log(res);
+    let obj = {
+      name : this.cust_name,
+      mobile : this.cust_mobile,
+      start : this.start,
+      limit : this.limit
+    }
+    this._users.getList(obj).subscribe(res=>{
       this.isDataLoading = false;
       if(res['data']){
         let { data } = res;
@@ -31,4 +40,9 @@ export class ListComponent {
     })
   }
 
+  clearFilter(){
+    this.cust_mobile = '';
+    this.cust_name = '';
+    this.getList();
+  }
 }

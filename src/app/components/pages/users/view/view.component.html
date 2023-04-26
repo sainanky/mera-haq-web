@@ -73,8 +73,53 @@
                 </div>
             </div>
 
-            <div class="row mb-3">
+            <div class="border-top mb-3 pt-2 row">
                 <div class="col-12">
+                    <h5 class="bold">Advance Details</h5>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Aadhar Card</th>
+                                <th>Marital Status</th>
+                                <th>Profession</th>
+                                <th>Apply For Loan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{userInfo?.AADHAR_CARD_NO ? userInfo?.AADHAR_CARD_NO : '-'}}</td>
+                                <td>{{userInfo?.MARITAL_STATUS ? userInfo?.MARITAL_STATUS : '-'}}</td>
+                                <td>{{userInfo?.PROFESSION ? userInfo?.PROFESSION : '-'}}</td>
+                                <td>{{userInfo?.APPLY_FOR_LOAN ? userInfo?.APPLY_FOR_LOAN : '-'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="border-top mb-3 pt-2 row">
+                <div class="col-12">
+                    <h5 class="bold">Bank Details</h5>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>UPI Name</th>
+                                <th>UPI ID</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{userInfo?.UPI_TYPE ? userInfo?.UPI_TYPE : '-'}}</td>
+                                <td>{{userInfo?.UPI_ID ? userInfo?.UPI_ID : '-'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="border-top mb-3 pt-2 row">
+                <div class="col-12">
+                    <h5 class="bold">Referral Details</h5>
                     <table class="table table-bordered">
                         <thead>
                             <tr>

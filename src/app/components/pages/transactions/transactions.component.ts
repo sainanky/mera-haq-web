@@ -44,7 +44,6 @@ export class TransactionsComponent {
   }
 
   onDateChange(val){
-    debugger
     let fromDate = moment().format('YYYY-MM-DD');
     let toDate = moment().format('YYYY-MM-DD');
     if(val == 'week'){

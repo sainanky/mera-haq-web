@@ -28,4 +28,8 @@ export class UsersService {
   getRefInfo(UID){
     return this._http.get(`/user/referral/info/${UID}`);
   }
+
+  updateUserStatus(UID, body){
+    return this._http.put(`/user/status/${UID}`, body);
+  }
 }

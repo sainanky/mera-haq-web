@@ -141,6 +141,16 @@
                 </div>
             </div>
 
+            <div class="">
+                <div class="col-12 text-center">
+                    <button *ngIf="!isSubmitLoading && userInfo?.IS_PAID == 0" class="btn btn-primary" (click)="updateUserStatus(userInfo?.UID, '1')">Mark As Paid</button>
+                    <button *ngIf="!isSubmitLoading && userInfo?.IS_PAID == 1" class="btn btn-primary" (click)="updateUserStatus(userInfo?.UID, '0')">Mark As Unpaid</button>
+                    <button *ngIf="isSubmitLoading" class="btn btn-primary">
+                        <i class="zmdi zmdi-spinner fa-spin"></i>
+                    </button>
+                </div>
+            </div>
+
           </div>
         </div>
 

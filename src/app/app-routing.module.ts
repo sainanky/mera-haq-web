@@ -8,6 +8,7 @@ import { PaymentSuccessComponent } from './components/payment-success/payment-su
 import { PrivacyComponent } from './components/privacy/privacy.component';
 import { TermsComponent } from './components/terms/terms.component';
 import { AuthGuard } from './services/auth.guard';
+import { PaymentLoadComponent } from './components/payment-load/payment-load.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,10 @@ const routes: Routes = [
       {
         path : "success",
         component : PaymentSuccessComponent
+      },
+      {
+        path : "payment",
+        component : PaymentLoadComponent
       },
       {
         path : "**",

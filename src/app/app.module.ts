@@ -17,13 +17,15 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { SharedModule } from './shared.module';
 import { PrivacyComponent } from './components/privacy/privacy.component';
 import { TermsComponent } from './components/terms/terms.component';
+import { PaymentLoadComponent } from './components/payment-load/payment-load.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
     PrivacyComponent,
-    TermsComponent
+    TermsComponent,
+    PaymentLoadComponent
   ],
   imports: [
     BrowserModule,
